@@ -18,8 +18,8 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background">
-      <div className="mx-auto flex w-full max-w-7xl items-center gap-4 px-5 py-4">
+    <header className="sticky top-0 z-40 border-b border-[#e6ede4]/80 bg-white/90 backdrop-blur-xl shadow-[0_5px_30px_rgba(18,61,43,.045)]">
+      <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-5 py-3 lg:gap-5">
         <Link href="/" className="shrink-0" aria-label="BIAPAY">
           <Image
             src="/assets/brand/biapay-wordmark.png"
@@ -31,11 +31,11 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav aria-label={t("primary")} className="hidden flex-1 md:block">
+        <nav aria-label={t("primary")} className="hidden flex-1 lg:block">
           <NavLinks locale={locale} pathname={pathname} />
         </nav>
 
-        <div className="ml-auto hidden items-center gap-3 md:flex">
+        <div className="ml-auto hidden items-center gap-3 lg:flex">
           <LanguageSwitcher />
           <a
             href={accountLinks.login}
@@ -57,7 +57,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="ml-auto inline-flex size-10 items-center justify-center rounded-full text-heading md:hidden"
+          className="ml-auto inline-flex size-10 items-center justify-center rounded-full text-heading lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}
@@ -68,7 +68,7 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="border-t border-border px-4 py-4 md:hidden">
+        <div id="mobile-nav" className="border-t border-border px-4 py-4 lg:hidden">
           <NavLinks
             locale={locale}
             pathname={pathname}
@@ -111,8 +111,9 @@ function NavLinks({
   const t = useTranslations("nav");
 
   return (
-    <ul className="flex flex-col gap-1 md:flex-row md:flex-nowrap md:items-center md:gap-1">
-      {shellNav.filter((item) => ["solutions","gateway","developers","pricing","about"].includes(item.key)).map((item) => {
+    <ul className="flex flex-col gap-1 lg:flex-row lg:flex-nowrap lg:items-center lg:gap-1">
+      <li><a href={pathname === "/" ? "#solutions" : `/${locale}#solutions`} className="rounded-full px-3 py-2 text-sm font-medium text-heading hover:bg-accent">{locale==="fr"?"Produits":"Products"}</a></li>
+      {shellNav.filter((item) => ["solutions","developers","pricing","about"].includes(item.key)).map((item) => {
         const label = t(item.key);
         const current = item.key === "home" && pathname === "/";
         const className = cn(
