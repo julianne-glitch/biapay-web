@@ -1,0 +1,31 @@
+"use client";
+import {useEffect,useState} from "react";
+import {AnimatePresence,motion,useReducedMotion} from "motion/react";
+import {ArrowUpRight,Check,Globe2,MapPin,MoveRight,Smartphone,Store,Ticket,Code2} from "lucide-react";
+import "./africa-journey.css";
+const destinations=[
+ {city:"Douala",country:"Cameroun",enCountry:"Cameroon",code:"CM",lat:4.05,lng:9.7,fr:"Un commerce partage son lien de paiement.",en:"A merchant shares a payment link.",type:"merchant"},
+ {city:"Abidjan",country:"Côte d’Ivoire",enCountry:"Côte d’Ivoire",code:"CI",lat:5.35,lng:-4.0,fr:"Un organisateur prépare sa billetterie.",en:"An organiser prepares event ticketing.",type:"event"},
+ {city:"Dakar",country:"Sénégal",enCountry:"Senegal",code:"SN",lat:14.69,lng:-17.44,fr:"Une équipe découvre les intégrations API.",en:"A team explores payment API integrations.",type:"developer"},
+ {city:"Kinshasa",country:"RDC",enCountry:"DR Congo",code:"CD",lat:-4.32,lng:15.31,fr:"Une entreprise explore la facturation.",en:"A business explores invoicing.",type:"business"}
+] as const;
+export function AfricaJourney({locale}:{locale:"fr"|"en"}){
+ const fr=locale==="fr";const [active,setActive]=useState(0);const [playing,setPlaying]=useState(true);const reduce=useReducedMotion();
+ useEffect(()=>{if(!playing||reduce)return;const timer=window.setInterval(()=>setActive(v=>(v+1)%destinations.length),5200);return()=>window.clearInterval(timer)},[playing,reduce]);
+ const selected=destinations[active];
+ return <section className="bp-africa" aria-labelledby="bp-africa-title"><div className="bp-shell bp-africa-inner">
+ <div className="bp-africa-copy"><div className="bp-section-label"><Globe2 size={14}/> {fr?"UNE AMBITION SANS FRONTIÈRES":"A BORDERLESS AMBITION"}</div>
+ <h2 id="bp-africa-title">{fr?<>Des idées d&apos;ici.<br/><em>Des possibilités partout.</em></>:<>Ideas born here.<br/><em>Possibilities everywhere.</em></>}</h2>
+ <p>{fr?"Du commerce à la billetterie, de la facturation aux intégrations, BIAPAY réunit les outils pour imaginer une nouvelle façon de faire des affaires.":"From commerce to ticketing, invoicing to integrations, BIAPAY brings together the tools to imagine a new way of doing business."}</p>
+ <div className="bp-africa-route" role="tablist" aria-label={fr?"Explorer les exemples par ville":"Explore city examples"}>{destinations.map((place,i)=><button key={place.code} role="tab" aria-selected={i===active} className={i===active?"selected":""} onClick={()=>{setActive(i);setPlaying(false)}}><span className="bp-route-dot"/>{place.city}</button>)}</div>
+ <div className="bp-africa-caption"><span className="bp-caption-icon"><MapPin size={16}/></span><div><small>{fr?"EXEMPLE D’USAGE · NON GÉOLOCALISÉ":"ILLUSTRATIVE USE CASE · NOT GEOLOCATED"}</small><AnimatePresence mode="wait"><motion.strong key={active} initial={reduce?false:{opacity:0,y:7}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-7}} transition={{duration:.24}}>{fr?selected.fr:selected.en}</motion.strong></AnimatePresence></div></div>
+ <a href={fr?"https://biapay.net/payment-solutions/?lang=fr":"https://biapay.net/payment-solutions/"} className="bp-africa-link">{fr?"Découvrir les solutions":"Explore the solutions"} <ArrowUpRight size={17}/></a>
+ </div>
+ <div className="bp-africa-art" aria-label={fr?"Illustration animée des possibilités BIAPAY en Afrique":"Animated illustration of BIAPAY use cases across Africa"}>
+ <div className="bp-africa-grid"/>
+ <svg className="bp-africa-map" viewBox="0 0 540 510" fill="none" role="img" aria-label={fr?"Carte stylisée de l’Afrique":"Stylised map of Africa"}><defs><linearGradient id="africaFill" x1="80" y1="0" x2="480" y2="500"><stop stopColor="#D8F2A8"/><stop offset="1" stopColor="#7AAE33"/></linearGradient><pattern id="mapdots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#21523A" opacity=".22"/></pattern></defs><path d="M159 66 193 43 235 49 261 34 297 45 321 73 359 76 383 109 418 115 433 145 410 175 426 205 396 223 388 262 360 279 343 309 321 334 305 374 288 411 269 452 246 476 230 452 231 419 216 389 210 348 190 319 167 298 152 268 121 256 102 228 76 211 63 183 82 154 101 132 113 104 139 101Z" fill="url(#africaFill)" stroke="#E8F7D7" strokeWidth="3"/><path d="M159 66 193 43 235 49 261 34 297 45 321 73 359 76 383 109 418 115 433 145 410 175 426 205 396 223 388 262 360 279 343 309 321 334 305 374 288 411 269 452 246 476 230 452 231 419 216 389 210 348 190 319 167 298 152 268 121 256 102 228 76 211 63 183 82 154 101 132 113 104 139 101Z" fill="url(#mapdots)"/><path d="M417 330 445 353 441 393 423 435 409 420 411 376Z" fill="#A2D663" stroke="#E8F7D7" strokeWidth="2"/><path d="M98 208Q194 154 305 261M98 208Q188 225 263 290M305 261Q273 244 263 290" stroke="#fff" strokeWidth="2" strokeDasharray="6 8" opacity=".8"/><circle cx="98" cy="208" r="6" fill="#fff"/><circle cx="263" cy="290" r="6" fill="#fff"/><circle cx="305" cy="261" r="6" fill="#fff"/></svg>
+ <div className="bp-africa-live"><span className="bp-live-signal"/>{fr?"DES HISTOIRES POSSIBLES":"POSSIBLE STORIES"}</div>
+ <AnimatePresence mode="wait"><motion.div className="bp-africa-city" key={selected.code} initial={reduce?false:{opacity:0,y:22,scale:.96}} animate={{opacity:1,y:0,scale:1}} exit={{opacity:0,y:-12,scale:.97}} transition={{duration:.35}}><div className="bp-city-top"><span className="bp-city-flag">{selected.code}</span><span>{fr?"SCÉNARIO ILLUSTRATIF":"ILLUSTRATIVE SCENARIO"}</span></div><div className="bp-city-title"><MapPin size={18}/><strong>{selected.city}</strong><span>{fr?selected.country:selected.enCountry}</span></div><div className="bp-city-service">{selected.type==="merchant"?<Store/>:selected.type==="event"?<Ticket/>:selected.type==="developer"?<Code2/>:<Smartphone/>}<span>{fr?selected.fr:selected.en}</span><Check size={18}/></div></motion.div></AnimatePresence>
+ <div className="bp-africa-foot"><span>BIAPAY</span><span>{String(active+1).padStart(2,"0")} / 04</span><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?(fr?"Arrêter l’animation":"Pause animation"):(fr?"Reprendre l’animation":"Resume animation")}>{playing?(fr?"Pause":"Pause"):(fr?"Lecture":"Play")} <MoveRight size={14}/></button></div>
+ </div></div></section>
+}
