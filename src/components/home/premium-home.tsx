@@ -2,16 +2,17 @@
 
 import "./premium-home.css";
 import "./premium-collage.css";
+import {PartnerCarousel} from "./partner-carousel";
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, CreditCard, Link2, QrCode, ReceiptText, Ticket, Code2, ShieldCheck, X, CheckCircle2, Play, Pause } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 type Locale = "fr" | "en";
 const stories = [
-  { key:"paylink", image:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85", fr:{tag:"COMMERCE & ENTREPRENEURS",title:"Une vente commence par une idée.",desc:"Partagez un lien de paiement. Restez concentré sur ce que vous créez."},en:{tag:"COMMERCE & ENTREPRENEURS",title:"Every sale starts with an idea.",desc:"Share a payment link. Stay focused on what you create."}},
-  { key:"qr", image:"https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1400&q=85",fr:{tag:"PAIEMENT EN MAGASIN",title:"Chaque rencontre compte.",desc:"Proposez une expérience de paiement simple grâce au code QR."},en:{tag:"IN-STORE PAYMENTS",title:"Every connection matters.",desc:"Offer a simple QR-code payment experience."}},
-  { key:"events", image:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1400&q=85",fr:{tag:"ÉVÉNEMENTS & BILLETTERIE",title:"Des moments à vivre. Sans friction.",desc:"Découvrez les solutions BIAPAY pour les événements et la billetterie."},en:{tag:"EVENTS & TICKETING",title:"More moments. Less friction.",desc:"Discover BIAPAY event and ticketing solutions."}},
-  { key:"developers", image:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=85",fr:{tag:"DÉVELOPPEURS",title:"Construisez la suite.",desc:"Explorez la documentation et les outils d’intégration BIAPAY."},en:{tag:"DEVELOPERS",title:"Build what comes next.",desc:"Explore BIAPAY documentation and integration tools."}}
+  { key:"paylink", image:"/assets/hero/merchant.jpg", fr:{tag:"COMMERCE & ENTREPRENEURS",title:"Une vente commence par une idée.",desc:"Partagez un lien de paiement. Restez concentré sur ce que vous créez."},en:{tag:"COMMERCE & ENTREPRENEURS",title:"Every sale starts with an idea.",desc:"Share a payment link. Stay focused on what you create."}},
+  { key:"developer", image:"/assets/hero/developer.jpg",fr:{tag:"DÉVELOPPEURS & INTÉGRATIONS",title:"Créez sans limites.",desc:"Intégrez les paiements dans vos applications grâce aux ressources API."},en:{tag:"DEVELOPERS & INTEGRATIONS",title:"Build without limits.",desc:"Connect payments to your apps with BIAPAY API resources."}},
+  { key:"events", image:"/assets/hero/events.jpg",fr:{tag:"ÉVÉNEMENTS & BILLETTERIE",title:"Des moments à vivre. Sans friction.",desc:"Découvrez les solutions BIAPAY pour les événements et la billetterie."},en:{tag:"EVENTS & TICKETING",title:"More moments. Less friction.",desc:"Discover BIAPAY event and ticketing solutions."}},
+  { key:"business", image:"/assets/hero/business.jpg",fr:{tag:"ENTREPRISES & GESTION",title:"Votre activité, en mouvement.",desc:"Encaissez, facturez et pilotez vos transactions au même endroit."},en:{tag:"BUSINESS & MANAGEMENT",title:"Keep business moving.",desc:"Accept payments, invoice and manage transactions in one place."}}
 ] as const;
 const products = [
  {icon:Link2,slug:"biapay-paylink",fr:"Paylink",en:"Paylink",descFr:"Créez un lien pour demander un paiement.",descEn:"Create a link to request payment."},
@@ -52,6 +53,7 @@ export function PremiumHome({locale}:{locale:Locale}) {
    </div>
    <div className="bp-shell bp-story-tabs">{stories.map((s,i)=><button key={s.key} className={active===i?"selected":""} onClick={()=>setActive(i)}><span>0{i+1}</span><strong>{s[locale].tag}</strong><span className="bp-tab-line"/></button>)}</div>
   </section>
+  <PartnerCarousel locale={locale}/>
   <section className="bp-proof bp-shell"><div><strong>{fr?"Pensé pour votre activité":"Built around your business"}</strong><span>{fr?"Commerce · Événements · Intégrations":"Commerce · Events · Integrations"}</span></div><div className="bp-proof-items"><span><ShieldCheck size={18}/>{fr?"Sécurité":"Security"}</span><span><QrCode size={18}/>{fr?"Paiements QR":"QR payments"}</span><span><Code2 size={18}/>{fr?"API":"APIs"}</span><span><Ticket size={18}/>{fr?"Billetterie":"Ticketing"}</span></div></section>
   <section className="bp-intro bp-shell"><div className="bp-intro-heading"><span className="bp-section-label">{fr?"UNE PLATEFORME. PLUS DE POSSIBILITÉS.":"ONE PLATFORM. MORE POSSIBILITIES."}</span><h2>{fr?<>Le paiement ne devrait<br/>jamais freiner <em>vos idées.</em></>:<>Payments should never<br/>hold back <em>your ideas.</em></>}</h2></div><p>{fr?"Du premier paiement à de nouvelles opportunités, découvrez les solutions BIAPAY adaptées à différents moments de votre activité.":"From your first payment to new opportunities, discover BIAPAY solutions for different moments in your business."}</p></section>
   <section className="bp-products"><div className="bp-shell"><div className="bp-section-top"><div><span className="bp-section-label">{fr?"L'ÉCOSYSTÈME BIAPAY":"THE BIAPAY ECOSYSTEM"}</span><h2>{fr?"Tout commence ici.":"It all starts here."}</h2></div><a href={source("payment-solutions")}>{fr?"Toutes les solutions":"All solutions"} <ArrowUpRight size={17}/></a></div><div className="bp-product-grid">{products.map((p,i)=>{const Icon=p.icon;return <a key={p.slug} href={source(fr?p.slug:("enSlug" in p ? p.enSlug ?? p.slug : p.slug))} className="bp-product-card"><span className="bp-product-number">0{i+1}</span><div className="bp-product-icon"><Icon size={25} strokeWidth={1.6}/></div><h3>{fr?p.fr:p.en}</h3><p>{fr?p.descFr:p.descEn}</p><span className="bp-product-arrow"><ArrowUpRight size={20}/></span></a>})}</div></div></section>

@@ -19,7 +19,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background">
-      <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3">
+      <div className="mx-auto flex w-full max-w-7xl items-center gap-4 px-5 py-4">
         <Link href="/" className="shrink-0" aria-label="BIAPAY">
           <Image
             src="/assets/brand/biapay-wordmark.png"
@@ -111,8 +111,8 @@ function NavLinks({
   const t = useTranslations("nav");
 
   return (
-    <ul className="flex flex-col gap-1 md:flex-row md:flex-wrap md:items-center md:gap-1">
-      {shellNav.map((item) => {
+    <ul className="flex flex-col gap-1 md:flex-row md:flex-nowrap md:items-center md:gap-1">
+      {shellNav.filter((item) => ["solutions","gateway","developers","pricing","about"].includes(item.key)).map((item) => {
         const label = t(item.key);
         const current = item.key === "home" && pathname === "/";
         const className = cn(
