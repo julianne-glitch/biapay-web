@@ -1,0 +1,212 @@
+// Marketing-site content model.
+// Do not add card data, customer payment details, private API keys,
+// or transaction credentials. Payment processing stays outside this site.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ContentLocale {
+  fr
+  en
+
+  @@map("content_locale")
+}
+
+enum PublicationStatus {
+  draft
+  in_review
+  scheduled
+  published
+  archived
+
+  @@map("publication_status")
+}
+
+enum PartnerApprovalStatus {
+  pending
+  approved
+  rejected
+  hidden
+
+  @@map("partner_approval_status")
+}
+
+enum EnquiryStatus {
+  new
+  read
+  closed
+
+  @@map("enquiry_status")
+}
+
+enum AdminRoleKey {
+  owner
+  editor
+  viewer
+
+  @@map("admin_role_key")
+}
+
+/// Role catalog for future admin auth. No users are seeded.
+model AdminRole {
+  id          String       @id @default(cuid())
+  code        AdminRoleKey @unique
+  name        String
+  description String?
+  users       AdminUser[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("admin_roles")
+}
+
+/// Links to an Auth.js subject later. No password and no payment identity.
+model AdminUser {
+  id            String               @id @default(cuid())
+  email         String               @unique
+  name          String?
+  roleId        String
+  role          AdminRole            @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  authSubject   String?              @unique
+  disabledAt    DateTime?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  publications  ContentPublication[]
+
+  @@map("admin_users")
+}
+
+model ProductCategory {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  sortOrder Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+
+  @@map("product_categories")
+}
+
+model Product {
+  id         String              @id @default(cuid())
+  slug       String              @unique
+  categoryId String?
+  category   ProductCategory?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  sortOrder  Int                 @default(0)
+  status     PublicationStatus   @default(draft)
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+  pages      WebsitePage[]
+  demos      DemoConfiguration[]
+
+  @@index([categoryId])
+  @@map("products")
+}
+
+/// Translated fields for entities that exist once (product, category, partner).
+/// ownerType + ownerId are not a foreign key, so pages can use WebsitePage instead.
+model LocalizedContent {
+  id        String        @id @default(cuid())
+  ownerType String
+  ownerId   String
+  locale    ContentLocale
+  field     String
+  value     String        @db.Text
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@unique([ownerType, ownerId, locale, field])
+  @@index([ownerType, ownerId])
+  @@map("localized_content")
+}
+
+model WebsitePage {
+  id           String               @id @default(cuid())
+  slug         String
+  locale       ContentLocale
+  title        String
+  summary      String?              @db.Text
+  status       PublicationStatus    @default(draft)
+  productId    String?
+  product      Product?             @relation(fields: [productId], references: [id], onDelete: SetNull)
+  publishedAt  DateTime?
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  publications ContentPublication[]
+
+  @@unique([slug, locale])
+  @@index([productId])
+  @@map("website_pages")
+}
+
+/// A partner is shown only after status becomes approved. No logo binary is stored.
+model Partner {
+  id         String                @id @default(cuid())
+  slug       String                @unique
+  name       String
+  websiteUrl String?
+  logoPath   String?
+  status     PartnerApprovalStatus @default(pending)
+  approvedAt DateTime?
+  sortOrder  Int                   @default(0)
+  createdAt  DateTime              @default(now())
+  updatedAt  DateTime              @updatedAt
+
+  @@index([status])
+  @@map("partners")
+}
+
+/// Public demo settings only. Do not put secrets in settings.
+model DemoConfiguration {
+  id        String        @id @default(cuid())
+  slug      String        @unique
+  productId String?
+  product   Product?      @relation(fields: [productId], references: [id], onDelete: SetNull)
+  locale    ContentLocale
+  title     String
+  settings  Json
+  isPublic  Boolean       @default(false)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([productId])
+  @@map("demo_configurations")
+}
+
+model ContactEnquiry {
+  id        String        @id @default(cuid())
+  locale    ContentLocale
+  name      String
+  email     String
+  topic     String?
+  message   String        @db.Text
+  status    EnquiryStatus @default(new)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([status])
+  @@map("contact_enquiries")
+}
+
+model ContentPublication {
+  id            String            @id @default(cuid())
+  pageId        String?
+  page          WebsitePage?      @relation(fields: [pageId], references: [id], onDelete: SetNull)
+  locale        ContentLocale
+  status        PublicationStatus
+  version       Int
+  notes         String?           @db.Text
+  publishedById String?
+  publishedBy   AdminUser?        @relation(fields: [publishedById], references: [id], onDelete: SetNull)
+  publishedAt   DateTime?
+  createdAt     DateTime          @default(now())
+
+  @@index([pageId])
+  @@map("content_publications")
+}

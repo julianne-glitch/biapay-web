@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "BIAPAY – Payment Gateway & Payment Integrator by B.I.A.",
+    "description": "The gateway and integrator that will make your whole payment life easier."
+  },
+  "nav": {
+    "primary": "Primary navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
+    "about": "About BIAPAY",
+    "news": "News | Blog",
+    "gateway": "Gateway",
+    "solutions": "Solutions",
+    "pricing": "Pricing",
+    "developers": "Developers",
+    "help": "Help Center"
+  },
+  "account": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "language": {
+    "label": "Language",
+    "fr": "Français",
+    "en": "English"
+  },
+  "home": {
+    "title": "BIAPAY",
+    "summary": "The gateway and integrator that will make your whole payment life easier.",
+    "phaseNote": "This view is the site foundation. The full homepage is not part of this version."
+  },
+  "footer": {
+    "about": "About BIAPAY",
+    "careers": "Careers",
+    "contact": "Contact",
+    "legal": "Legal Notices",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "partners": "Our Partners",
+    "help": "Help Center",
+    "company": "Business Intelligence Agency",
+    "companyLegal": "Business Intelligence Agency SAS",
+    "addressLabel": "Address",
+    "address": "s/c Business Intelligence Agency, Carrefour Acacias, Biyem-Assi, B.P. 14893 Yaoundé / Cameroun",
+    "emailLabel": "E-mail",
+    "email": "info@biapay.net",
+    "phoneLabel": "Phone",
+    "phone": "+237 6 73 61 31 53",
+    "socialLabel": "Social",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "linkedin": "Linkedin",
+    "youtube": "Youtube"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "BIAPAY – Payment Gateway & Payment Integrator by B.I.A.",
+    "description": "La passerelle et l'intégrateur de choix pour faciliter tous vos paiements."
+  },
+  "nav": {
+    "primary": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "home": "Accueil",
+    "about": "À propos",
+    "news": "News | Blog",
+    "gateway": "Passerelle",
+    "solutions": "Solutions",
+    "pricing": "Tarif",
+    "developers": "Développeurs",
+    "help": "Help Center"
+  },
+  "account": {
+    "login": "Connexion",
+    "register": "S'inscrire"
+  },
+  "language": {
+    "label": "Langue",
+    "fr": "Français",
+    "en": "English"
+  },
+  "home": {
+    "title": "BIAPAY",
+    "summary": "La passerelle et l'intégrateur de choix pour faciliter tous vos paiements.",
+    "phaseNote": "Cette vue est le socle du site. La page d'accueil complète n'est pas dans cette version."
+  },
+  "footer": {
+    "about": "À propos de BIAPAY",
+    "careers": "Carrière",
+    "contact": "Contact",
+    "legal": "Infos légales",
+    "terms": "Conditions Générales",
+    "privacy": "Politique de confidentialité",
+    "partners": "Partenaires",
+    "help": "Aide & Assistance",
+    "company": "Business Intelligence Agency",
+    "companyLegal": "Business Intelligence Agency SAS",
+    "addressLabel": "Adresse",
+    "address": "s/c Business Intelligence Agency, Carrefour Acacias, Biyem-Assi, B.P. 14893 Yaoundé / Cameroun",
+    "emailLabel": "E-mail",
+    "email": "info@biapay.net",
+    "phoneLabel": "Téléphone",
+    "phone": "+237 6 73 61 31 53",
+    "socialLabel": "Réseaux",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "linkedin": "Linkedin",
+    "youtube": "Youtube"
+  }
+}
