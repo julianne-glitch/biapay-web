@@ -90,8 +90,8 @@ export const footerNav: ReadonlyArray<{
   {
     key: "careers",
     href: {
-      fr: "/fr/about",
-      en: "/en/about",
+      fr: "/fr/careers",
+      en: "/en/careers",
     },
   },
   {
@@ -104,29 +104,29 @@ export const footerNav: ReadonlyArray<{
   {
     key: "legal",
     href: {
-      fr: "/fr/contact",
-      en: "/en/contact",
+      fr: "/fr/legal",
+      en: "/en/legal",
     },
   },
   {
     key: "terms",
     href: {
-      fr: "/fr/contact",
-      en: "/en/contact",
+      fr: "/fr/terms",
+      en: "/en/terms",
     },
   },
   {
     key: "privacy",
     href: {
-      fr: "/fr/contact",
-      en: "/en/contact",
+      fr: "/fr/privacy",
+      en: "/en/privacy",
     },
   },
   {
     key: "partners",
     href: {
-      fr: "/fr/about",
-      en: "/en/about",
+      fr: "/fr/partners",
+      en: "/en/partners",
     },
   },
   {

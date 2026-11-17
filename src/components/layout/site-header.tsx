@@ -135,6 +135,22 @@ function NavLinks({
             </li>
           );
         }
+        if (item.key === "about") {
+          const submenu = [
+            {slug:"about",en:"Our story",fr:"Notre histoire"},
+            {slug:"careers",en:"Careers",fr:"Carrières"},
+            {slug:"partners",en:"Our partners",fr:"Nos partenaires"},
+            {slug:"legal",en:"Legal center",fr:"Centre juridique"},
+            {slug:"terms",en:"Terms & conditions",fr:"Conditions générales"},
+            {slug:"privacy",en:"Privacy policy",fr:"Confidentialité"},
+          ];
+          return <li key={item.key} className="group relative">
+            <a href={item.href[locale]} className={className} onClick={onNavigate}>{label} <span aria-hidden="true">⌄</span></a>
+            <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-[#e1eadb] bg-white p-2 shadow-[0_18px_45px_#123e3222] lg:invisible lg:absolute lg:left-0 lg:top-full lg:z-50 lg:mt-0 lg:min-w-[220px] lg:translate-y-2 lg:opacity-0 lg:transition-all lg:group-hover:visible lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-within:visible lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100">
+              {submenu.map(sub=><a key={sub.slug} href={"/"+locale+"/"+sub.slug} onClick={onNavigate} className="rounded-xl px-3 py-2 text-sm text-[#214d39] transition-colors hover:bg-[#eef7e8]">{locale==="fr"?sub.fr:sub.en}</a>)}
+            </div>
+          </li>;
+        }
 
         return (
           <li key={item.key}>
