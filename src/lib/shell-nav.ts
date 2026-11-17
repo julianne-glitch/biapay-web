@@ -27,8 +27,8 @@ export const shellNav = [
   {
     key: "news",
     href: {
-      fr: "https://biapay.net/blog/?lang=fr",
-      en: "https://biapay.net/blog/",
+      fr: "/fr/resources",
+      en: "/en/resources",
     },
   },
   {
@@ -41,7 +41,7 @@ export const shellNav = [
   {
     key: "solutions",
     href: {
-      fr: "/en/solutions?lang=fr",
+      fr: "/fr/solutions",
       en: "/en/solutions",
     },
   },
@@ -62,8 +62,8 @@ export const shellNav = [
   {
     key: "help",
     href: {
-      fr: "https://biapay.net/help-center/?lang=fr",
-      en: "https://biapay.net/help-center/",
+      fr: "/fr/resources",
+      en: "/en/resources",
     },
   },
 ] as const;
@@ -90,50 +90,50 @@ export const footerNav: ReadonlyArray<{
   {
     key: "careers",
     href: {
-      fr: "https://biapay.net/careers/?lang=fr",
-      en: "https://biapay.net/careers/",
+      fr: "/fr/about",
+      en: "/en/about",
     },
   },
   {
     key: "contact",
     href: {
-      fr: "/en/contact?lang=fr",
+      fr: "/fr/contact",
       en: "/en/contact",
     },
   },
   {
     key: "legal",
     href: {
-      fr: "https://biapay.net/legal/?lang=fr",
-      en: "https://biapay.net/legal/",
+      fr: "/fr/contact",
+      en: "/en/contact",
     },
   },
   {
     key: "terms",
     href: {
-      fr: "https://biapay.net/terms-conditions/?lang=fr",
-      en: "https://biapay.net/terms-conditions/",
+      fr: "/fr/contact",
+      en: "/en/contact",
     },
   },
   {
     key: "privacy",
     href: {
-      fr: "https://biapay.net/privacy-policy/?lang=fr",
-      en: "https://biapay.net/privacy-policy/",
+      fr: "/fr/contact",
+      en: "/en/contact",
     },
   },
   {
     key: "partners",
     href: {
-      fr: "https://biapay.net/partners/?lang=fr",
-      en: "https://biapay.net/partners/",
+      fr: "/fr/about",
+      en: "/en/about",
     },
   },
   {
     key: "help",
     href: {
-      fr: "https://biapay.net/help-center/?lang=fr",
-      en: "https://biapay.net/help-center/",
+      fr: "/fr/resources",
+      en: "/en/resources",
     },
   },
 ];
