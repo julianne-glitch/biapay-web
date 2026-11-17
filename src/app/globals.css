@@ -144,3 +144,15 @@
     color: var(--heading);
   }
 }
+/* BIAPAY site-wide editorial typography system ? shared across all locales. */
+:root{--biapay-display:Georgia,"Times New Roman",serif;--biapay-reading:var(--font-body),"Open Sans",Arial,sans-serif;--biapay-type-ink:#243b32}
+html{font-family:var(--biapay-reading);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body,button,input,select,textarea{font-family:var(--biapay-reading)}
+/* Display hierarchy: serif for section storytelling, sans for utility and cards. */
+main h1,main h2{font-family:var(--biapay-display)!important;font-weight:500!important;letter-spacing:-.045em!important;line-height:1.14}
+main h3,main h4,main h5,main h6{font-family:var(--biapay-reading)!important;font-weight:650!important;letter-spacing:-.025em}
+main h1 em,main h2 em{font-family:inherit;font-weight:inherit}
+main p{line-height:1.75}
+main :is(a,button,input,select,textarea){font-family:var(--biapay-reading)}
+main :is(button,a){text-underline-offset:3px}
+@media(max-width:640px){main h1,main h2{letter-spacing:-.035em!important;line-height:1.16}}
