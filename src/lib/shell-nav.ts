@@ -8,7 +8,7 @@ export function isLocale(value: string): value is Locale {
 
 export const accountLinks = {
   login: "https://connect.biapay.net/login",
-  register: "https://connect.biapay.net/register",
+  register: "https://connect.biapay.net/login",
 } as const;
 
 export const companyLink = "https://www.groupebia.com/";

@@ -46,7 +46,7 @@ export function SiteHeader() {
             {account("login")}
           </a>
           <a
-            href={`/${locale}/register`}
+            href={accountLinks.register}
             className={cn(buttonVariants({ size: "lg" }), "h-10 rounded-full px-4")}
           >
             {account("register")}
@@ -83,7 +83,7 @@ export function SiteHeader() {
               {account("login")}
             </a>
             <a
-              href={`/${locale}/register`}
+              href={accountLinks.register}
               className={cn(buttonVariants(), "h-10 rounded-full")}
             >
               {account("register")}

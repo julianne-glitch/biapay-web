@@ -1,7 +1,8 @@
-import type {Metadata} from "next";
-import Link from "next/link";
-import {notFound} from "next/navigation";
+import {redirect,notFound} from "next/navigation";
 import {isLocale,accountLinks} from "@/lib/shell-nav";
-import {EnquiryLayout} from "@/components/forms/enquiry-layout";
-export async function generateMetadata({params}:{params:Promise<{locale:string}>}):Promise<Metadata>{const {locale}=await params;return {title:locale==="fr"?"Rejoindre BIAPAY | Demande d'inscription":"Join BIAPAY | Business Registration Enquiry",description:locale==="fr"?"Présentez votre entreprise à BIAPAY grâce au formulaire de prise de contact.":"Introduce your business to BIAPAY through our registration enquiry form.",alternates:{canonical:`https://biapay-web-nu.vercel.app/${locale}/register`,languages:{en:"https://biapay-web-nu.vercel.app/en/register",fr:"https://biapay-web-nu.vercel.app/fr/register"}}}}
-export default async function Page({params}:{params:Promise<{locale:string}>}){const {locale}=await params;if(!isLocale(locale))notFound();return <><EnquiryLayout locale={locale} kind="registration"/><div style={{background:"#e8f1e7",padding:"30px 20px",textAlign:"center",color:"#214e35",fontSize:14}}>{locale==="fr"?"Vous avez déjà accès à BIAPAY ?":"Already have a BIAPAY account?"}{" "}<Link href={accountLinks.login} target="_blank" rel="noopener noreferrer" style={{fontWeight:800,textDecoration:"underline"}}>{locale==="fr"?"Se connecter au portail sécurisé":"Sign in to the secure portal"}</Link></div></>}
+/** Registration and sign-in are handled by the secure BIAPAY Connect portal. */
+export default async function RegisterPage({params}:{params:Promise<{locale:string}>}){
+ const {locale}=await params;
+ if(!isLocale(locale))notFound();
+ redirect(accountLinks.register);
+}
