@@ -33,7 +33,7 @@ export function PremiumHome({locale}:{locale:Locale}) {
  useEffect(()=>{if(paused||demo)return;const timer=setInterval(()=>setActive(v=>(v+1)%stories.length),6500);return()=>clearInterval(timer)},[paused,demo]);
  useEffect(()=>{if(!demo)return;function onKey(e:KeyboardEvent){if(e.key==="Escape")setDemo(false)}window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey)},[demo]);
 
- const source=(slug:string)=>`https://biapay.net/${slug}/${fr?"?lang=fr":""}`;
+ const source=(slug:string)=>`/${locale}/${slug === "payment-gateway" || slug === "payment-solutions" ? "solutions" : slug === "developers" ? "developers" : slug === "pricing-3" || slug === "pricing-2" ? "pricing" : slug === "about-biapay" ? "about" : "solutions"}`;
  return <main className="biapay-premium">
   <section className="bp-hero">
    <div className="bp-shell bp-hero-grid">

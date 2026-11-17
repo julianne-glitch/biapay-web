@@ -26,6 +26,6 @@ export function ConnectedStories({locale}:{locale:"fr"|"en"}){
   </div>
   <div className="bp-person bp-person-right"><div className="bp-person-photo bp-person-photo-right"/><div className="bp-person-caption"><span className="bp-person-online"/><div><strong>{fr?"Un partenaire":"A business partner"}</strong><small>{fr?"Une autre équipe, même ambition":"Another team, same ambition"}</small></div></div></div>
  </div>
- <div className="bp-connected-bottom"><div><span className="bp-connected-bottom-icon"><Icon size={20}/></span><div><small>{fr?"DÉCOUVREZ LE PARCOURS":"EXPLORE THE JOURNEY"}</small><strong>{fr?scene.actionFr:scene.actionEn}</strong></div></div><a href={fr?"https://biapay.net/?lang=fr":"https://biapay.net/"}>{fr?"Découvrir BIAPAY":"Explore BIAPAY"}<ArrowUpRight size={17}/></a></div>
+ <div className="bp-connected-bottom"><div><span className="bp-connected-bottom-icon"><Icon size={20}/></span><div><small>{fr?"DÉCOUVREZ LE PARCOURS":"EXPLORE THE JOURNEY"}</small><strong>{fr?scene.actionFr:scene.actionEn}</strong></div></div><a href={fr?"/fr/solutions":"/en/solutions"}>{fr?"Découvrir BIAPAY":"Explore BIAPAY"}<ArrowUpRight size={17}/></a></div>
  </div></section>
 }

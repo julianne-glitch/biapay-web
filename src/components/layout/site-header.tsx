@@ -112,7 +112,7 @@ function NavLinks({
 
   return (
     <ul className="flex flex-col gap-1 lg:flex-row lg:flex-nowrap lg:items-center lg:gap-1">
-      <li><a href={pathname === "/" ? "#solutions" : `/${locale}#solutions`} className="rounded-full px-3 py-2 text-sm font-medium text-heading hover:bg-accent">{locale==="fr"?"Produits":"Products"}</a></li>
+      <li><a href={`/${locale}/solutions`} className="rounded-full px-3 py-2 text-sm font-medium text-heading hover:bg-accent">{locale==="fr"?"Produits":"Products"}</a></li>
       {shellNav.filter((item) => ["solutions","developers","pricing","about"].includes(item.key)).map((item) => {
         const label = t(item.key);
         const current = item.key === "home" && pathname === "/";

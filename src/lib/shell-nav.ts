@@ -20,8 +20,8 @@ export const shellNav = [
   {
     key: "about",
     href: {
-      fr: "https://biapay.net/about-biapay/?lang=fr",
-      en: "https://biapay.net/about-biapay/",
+      fr: "/fr/about",
+      en: "/en/about",
     },
   },
   {
@@ -34,29 +34,29 @@ export const shellNav = [
   {
     key: "gateway",
     href: {
-      fr: "https://biapay.net/payment-gateway/?lang=fr",
-      en: "https://biapay.net/payment-gateway/",
+      fr: "/fr/solutions",
+      en: "/en/solutions",
     },
   },
   {
     key: "solutions",
     href: {
-      fr: "https://biapay.net/payment-solutions/?lang=fr",
-      en: "https://biapay.net/payment-solutions/",
+      fr: "/en/solutions?lang=fr",
+      en: "/en/solutions",
     },
   },
   {
     key: "pricing",
     href: {
-      fr: "https://biapay.net/pricing-3/?lang=fr",
-      en: "https://biapay.net/pricing-2/",
+      fr: "/fr/pricing",
+      en: "/en/pricing",
     },
   },
   {
     key: "developers",
     href: {
-      fr: "https://biapay.net/developers/?lang=fr",
-      en: "https://biapay.net/developers/",
+      fr: "/fr/developers",
+      en: "/en/developers",
     },
   },
   {
@@ -83,8 +83,8 @@ export const footerNav: ReadonlyArray<{
   {
     key: "about",
     href: {
-      fr: "https://biapay.net/about-biapay/?lang=fr",
-      en: "https://biapay.net/about-biapay/",
+      fr: "/fr/about",
+      en: "/en/about",
     },
   },
   {
@@ -97,8 +97,8 @@ export const footerNav: ReadonlyArray<{
   {
     key: "contact",
     href: {
-      fr: "https://biapay.net/contact/?lang=fr",
-      en: "https://biapay.net/contact/",
+      fr: "/en/contact?lang=fr",
+      en: "/en/contact",
     },
   },
   {
