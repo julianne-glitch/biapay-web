@@ -6,6 +6,7 @@ import "./premium-refinement.css";
 import "./africa-map-premium.css";
 import "./landing-finish.css";
 import "./developer-editorial.css";
+import "./classic-home.css";
 import {PartnerCarousel} from "./partner-carousel";
 import {AfricaJourney} from "./africa-journey";
 import {ConnectedStories} from "./connected-stories";
@@ -33,7 +34,7 @@ export function PremiumHome({locale}:{locale:Locale}) {
  useEffect(()=>{if(paused||demo)return;const timer=setInterval(()=>setActive(v=>(v+1)%stories.length),6500);return()=>clearInterval(timer)},[paused,demo]);
  useEffect(()=>{if(!demo)return;function onKey(e:KeyboardEvent){if(e.key==="Escape")setDemo(false)}window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey)},[demo]);
 
- const source=(slug:string)=>`/${locale}/${slug === "payment-gateway" || slug === "payment-solutions" ? "solutions" : slug === "developers" ? "developers" : slug === "pricing-3" || slug === "pricing-2" ? "pricing" : slug === "about-biapay" ? "about" : "solutions"}`;
+ const source=(slug:string)=>`/${locale}/${slug === "payment-gateway" || slug === "payment-solutions" ? "solutions" : slug === "developers" ? "developers" : slug === "pricing-3" || slug === "pricing-2" ? "pricing" : slug === "about-biapay" ? "about" : slug === "contact" ? "contact" : "solutions"}`;
  return <main className="biapay-premium">
   <section className="bp-hero">
    <div className="bp-shell bp-hero-grid">
