@@ -32,3 +32,44 @@
 @keyframes dv-dots{0%,100%{opacity:.55}50%{opacity:1}}
 @media(max-width:600px){.dv-hero-grid{min-height:auto}.dv-visual{animation:none}.dv-node,.dv-node-biapay{animation:none}}
 @media(prefers-reduced-motion:reduce){.dv-visual,.dv-node,.dv-node-biapay,.dv-connector,.dv-visual-top span:last-child{animation:none!important}}
+
+/* Developer studio: an editorial, layered integration illustration. */
+.dv-hero{background:radial-gradient(ellipse 60% 75% at 90% 20%,#e2f0df 0%,transparent 85%),#fbfcf9}
+.dv-hero-grid{gap:clamp(28px,4vw,60px)}
+.dv-copy h1{font-weight:760;letter-spacing:-.062em;text-wrap:balance}
+.dv-visual{border:1px solid #d8e6dc;border-radius:18px;background:#fff;box-shadow:0 28px 80px #214b371b;animation:none;overflow:hidden}
+.dv-visual-top{padding:18px 22px;background:#f9fbf8}
+.dv-window-controls{display:flex;gap:6px!important;letter-spacing:normal!important;animation:none!important}
+.dv-window-controls i{height:8px;width:8px;border-radius:50%;background:#c7d8ca}
+.dv-window-controls i:first-child{background:#86b77b}
+.dv-studio{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);align-items:center;gap:7px;padding:35px 25px 42px;min-height:350px;background:radial-gradient(circle at 80% 30%,#edf7e7,transparent 55%),#fff}
+.dv-studio-rail{min-width:0}
+.dv-studio-rail>span,.dv-target-label{font-size:10px;letter-spacing:.12em;font-weight:850;color:#668775}
+.dv-studio-source{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:22px;padding:25px 19px;background:#f5f8f5;border:1px solid #dce8de;border-radius:15px}
+.dv-studio-source svg{color:#3d7e59}
+.dv-studio-source strong{font-size:17px;line-height:1.2;letter-spacing:-.03em;color:#204636}
+.dv-studio-source small{font-size:9px;letter-spacing:.11em;color:#718b7c}
+.dv-studio-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.dv-studio-chips span{font-size:10px;padding:6px 9px;border:1px solid #e0e9df;border-radius:20px;color:#5e7665;background:#fff}
+.dv-studio-flow{display:flex;align-items:center;justify-content:center;color:#4c9462;position:relative}
+.dv-studio-flow:before{content:"";position:absolute;inset:-30px 13px;border-left:1px dashed #b4d3b9;animation:dv-flow-pulse 3s ease-in-out infinite}
+.dv-studio-flow svg{position:relative;background:white;border-radius:50%;padding:3px;width:31px;height:31px;animation:dv-flow-pulse 3s ease-in-out infinite}
+.dv-studio-target{min-width:0;min-height:255px;padding:23px 18px;background:#173e34;color:#fff;border-radius:15px;box-shadow:0 16px 35px #173e342a;position:relative;overflow:hidden}
+.dv-studio-target:after{content:"";position:absolute;width:180px;height:180px;right:-75px;top:-90px;border-radius:50%;background:#b9df9430}
+.dv-target-label{color:#b4d4bb}
+.dv-target-brand{display:flex;align-items:center;gap:12px;margin:32px 0 13px;color:#d4efb8}
+.dv-target-brand strong{font-size:clamp(20px,2.2vw,29px);letter-spacing:-.04em}
+.dv-studio-target p{color:#d2e4d6;font-size:12px;line-height:1.6}
+.dv-target-lines{display:grid;gap:8px;margin:20px 0}
+.dv-target-lines i{height:5px;width:80%;border-radius:9px;background:#ffffff21}
+.dv-target-lines i:nth-child(2){width:60%}.dv-target-lines i:nth-child(3){width:70%}
+.dv-target-foot{font-size:9px;letter-spacing:.08em;color:#c6e4c7;display:flex;align-items:center;gap:12px}
+.dv-visual-bottom{background:#f9fbf8;font-size:9px;letter-spacing:.06em}
+.dv-platform{border-radius:17px;min-height:300px}
+.dv-platform-logo{font-family:inherit;letter-spacing:-.065em;font-size:38px}
+.dv-platform h3{font-weight:760}
+.dv-resource-grid article{border-radius:12px;border:1px solid #e2ebe1;border-top:3px solid #78ae75}
+.dv-page :is(a,button):focus-visible{outline:3px solid #5d9b69;outline-offset:4px}
+@keyframes dv-flow-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(max-width:600px){.dv-studio{padding:20px 12px 25px;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:3px;min-height:300px}.dv-studio-source{padding:18px 11px}.dv-studio-source strong{font-size:13px}.dv-studio-chips span{font-size:9px}.dv-studio-target{padding:18px 10px;min-height:245px}.dv-target-brand{gap:5px}.dv-target-brand strong{font-size:18px}.dv-target-brand svg{width:20px}.dv-target-label,.dv-studio-rail>span{font-size:8px}.dv-visual-bottom{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.dv-studio-flow:before,.dv-studio-flow svg{animation:none}}
