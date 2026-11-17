@@ -46,9 +46,7 @@ export function SiteHeader() {
             {account("login")}
           </a>
           <a
-            href={accountLinks.register}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/${locale}/register`}
             className={cn(buttonVariants({ size: "lg" }), "h-10 rounded-full px-4")}
           >
             {account("register")}
@@ -85,9 +83,7 @@ export function SiteHeader() {
               {account("login")}
             </a>
             <a
-              href={accountLinks.register}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/${locale}/register`}
               className={cn(buttonVariants(), "h-10 rounded-full")}
             >
               {account("register")}
