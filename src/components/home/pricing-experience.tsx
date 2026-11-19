@@ -1,24 +1,277 @@
 "use client";
-import {useState} from "react";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import {ArrowUpRight,Check,Info,ArrowRight,ShieldCheck,WalletCards,ChartNoAxesCombined,Building2} from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Building2,
+  ChartNoAxesCombined,
+  Check,
+  Info,
+  WalletCards,
+} from "lucide-react";
+import { MerchantStory } from "./merchant-narrative";
 import "./pricing-experience.css";
-const plans=[
-{name:"Starter",price:900,pos:"3",users:"2",currencies:"XAF",settle:"Mon / Wed / Fri",local:"1.5%",cards:"2.75%",wallets:"2.75%",bank:"1.50%",biapay:"0.5%"},
-{name:"Advanced",price:4900,pos:"10",users:"5",currencies:"XAF, EUR, USD",settle:"Daily",local:"1.5%",cards:"2.75%",wallets:"2.75%",bank:"1.50%",biapay:"0.5%"},
-{name:"Premium",price:49900,pos:"20",users:"10",currencies:"XAF, EUR, USD",settle:"Real-time*",local:"1.5%",cards:"2.50%",wallets:"2.50%",bank:"1.50%",biapay:"0.5%"},
-{name:"Privilege",price:null,pos:"Unlimited",users:"Unlimited",currencies:"All available",settle:"By agreement",local:"Custom",cards:"Custom",wallets:"Custom",bank:"Custom",biapay:"Custom"}
+import "./merchant-narrative.css";
+
+const plans = [
+  { name: "Starter", price: 900, pos: "3", users: "2", currencies: "XAF", settle: "Mon / Wed / Fri", local: "1.5%", cards: "2.75%", wallets: "2.75%", bank: "1.50%", biapay: "0.5%" },
+  { name: "Advanced", price: 4900, pos: "10", users: "5", currencies: "XAF, EUR, USD", settle: "Daily", local: "1.5%", cards: "2.75%", wallets: "2.75%", bank: "1.50%", biapay: "0.5%" },
+  { name: "Premium", price: 49900, pos: "20", users: "10", currencies: "XAF, EUR, USD", settle: "Real-time*", local: "1.5%", cards: "2.50%", wallets: "2.50%", bank: "1.50%", biapay: "0.5%" },
+  { name: "Privilege", price: null, pos: "Unlimited", users: "Unlimited", currencies: "All available", settle: "By agreement", local: "Custom", cards: "Custom", wallets: "Custom", bank: "Custom", biapay: "Custom" },
 ];
-export function PricingExperience({locale}:{locale:"en"|"fr"}){
-const fr=locale==="fr";const [compare,setCompare]=useState(false);const [volume,setVolume]=useState(250000);const [method,setMethod]=useState<"local"|"cards"|"wallets"|"bank"|"biapay">("local");
-const methods=[{key:"local",en:"Local mobile money",fr:"Mobile money local"},{key:"cards",en:"Cards",fr:"Cartes"},{key:"wallets",en:"International wallets",fr:"Portefeuilles internationaux"},{key:"bank",en:"Online banking",fr:"Banque en ligne"},{key:"biapay",en:"BIAPAY mobile payment",fr:"Paiement mobile BIAPAY"}] as const;
-const money=(n:number)=>new Intl.NumberFormat(fr?"fr-FR":"en-US").format(n);
-const rows=[{en:"Monthly subscription",fr:"Abonnement mensuel",get:(p:typeof plans[number])=>p.price===null?(fr?"Sur devis":"On request"):`${money(p.price)} XAF`},{en:"Point-of-sale locations",fr:"Points de vente",get:(p:typeof plans[number])=>p.pos},{en:"Included sub-users",fr:"Sous-utilisateurs inclus",get:(p:typeof plans[number])=>p.users},{en:"Transaction currencies",fr:"Devises de transaction",get:(p:typeof plans[number])=>p.currencies},{en:"Settlement frequency",fr:"Fréquence de règlement",get:(p:typeof plans[number])=>p.settle},{en:"Local mobile money fee",fr:"Frais mobile money local",get:(p:typeof plans[number])=>p.local},{en:"Card payment fee",fr:"Frais de paiement par carte",get:(p:typeof plans[number])=>p.cards},{en:"International wallet fee",fr:"Frais des portefeuilles internationaux",get:(p:typeof plans[number])=>p.wallets},{en:"Online banking fee",fr:"Frais banque en ligne",get:(p:typeof plans[number])=>p.bank},{en:"BIAPAY mobile payment fee",fr:"Frais mobile BIAPAY",get:(p:typeof plans[number])=>p.biapay}];
-return <main className="px-page">
-<section className="px-hero"><div className="px-container px-hero-inner"><span className="px-eyebrow"><span className="px-dot"/> {fr?"TARIFS & ABONNEMENTS":"PLANS & PRICING"}</span><h1>{fr?<>Grandissez à votre rythme.<br/><em>Payez en toute clarté.</em></>:<>Built for your ambition.<br/><em>Priced for your journey.</em></>}</h1><p>{fr?"Des premiers paiements à une activité à grande échelle, découvrez les quatre formules présentées par BIAPAY. Comparez les fonctionnalités et les frais avant de choisir.":"From your first transactions to a growing enterprise, explore BIAPAY's four published business plans. Compare features and transaction fees with clarity."}</p><div className="px-hero-actions"><a href="#plans" className="px-primary">{fr?"Découvrir les formules":"Explore plans"} <ArrowRight size={17}/></a><Link href={`/${locale}/contact`} className="px-secondary">{fr?"Parler à un conseiller":"Speak with our team"} <ArrowUpRight size={16}/></Link></div><div className="px-hero-points"><span><Check size={16}/>{fr?"4 formules":"4 business plans"}</span><span><Check size={16}/>{fr?"Comparaison détaillée":"Detailed comparison"}</span><span><Check size={16}/>{fr?"Compte professionnel":"Business accounts"}</span></div><div className="px-hero-orbit px-orbit-one"/><div className="px-hero-orbit px-orbit-two"/></div></section>
-<section id="plans" className="px-plans"><div className="px-container"><div className="px-heading"><div><span className="px-eyebrow">{fr?"CHOISISSEZ VOTRE FORMULE":"FIND YOUR FIT"}</span><h2>{fr?"Quatre façons d'aller plus loin.":"Four ways forward."}</h2></div><p>{fr?"Tarifs publiés sur l'ancien site BIAPAY, à confirmer avant toute souscription.":"Rates reproduced from BIAPAY's existing website; confirm current terms before subscribing."}</p></div><div className="px-plan-grid">{plans.map((p,i)=><article key={p.name} className={`px-plan px-plan-${i}`}><div className="px-plan-top"><div className="px-plan-number">0{i+1} / 04</div>{i===1&&<span className="px-popular">{fr?"POUR LES ENTREPRISES EN CROISSANCE":"FOR GROWING BUSINESSES"}</span>}<h3>{p.name}</h3><p>{[fr?"Pour commencer à encaisser":"Start collecting payments",fr?"Pour les activités en croissance":"For growing businesses",fr?"Pour les opérations à plus grande échelle":"For larger-scale operations",fr?"Une offre adaptée à vos besoins":"Tailored to your requirements"][i]}</p><div className="px-price">{p.price===null?<strong className="px-onrequest">{fr?"Sur devis":"On request"}</strong>:<><strong>{money(p.price)}</strong><span>XAF <small>/ {fr?"mois":"month"}</small></span></>}</div></div><div className="px-plan-features"><span><Check size={15}/>{p.pos} {fr?"points de vente":"POS locations"}</span><span><Check size={15}/>{p.users} {fr?"sous-utilisateurs":"sub-users"}</span><span><Check size={15}/>{p.currencies}</span><span><Check size={15}/>{fr?"Règlement : ":"Settlement: "}{i===0?(fr?"lun./mer./ven.":"Mon/Wed/Fri"):i===1?(fr?"quotidien":"daily"):i===2?(fr?"temps réel*":"real-time*"):(fr?"sur accord":"by agreement")}</span></div><Link href={`/${locale}/contact`} className="px-plan-action">{i===3?(fr?"Demander une offre":"Request a quote"):(fr?"Se renseigner":"Enquire about this plan")} <ArrowUpRight size={17}/></Link></article>)}</div><div className="px-disclaimer"><Info size={17}/><p>{fr?"Les montants affichés proviennent de la grille tarifaire du site BIAPAY existant. Ils sont hors TVA et peuvent avoir changé. La validation KYC est nécessaire pour les transactions réelles. Certaines fonctionnalités et méthodes de paiement sont soumises à disponibilité.":"Figures are from the pricing schedule on the existing BIAPAY website. They exclude VAT and may have changed. KYC approval is required for live transactions. Some features and payment methods are subject to availability."}</p></div></div></section>
-<section className="px-estimate"><div className="px-container px-estimate-grid"><div><span className="px-eyebrow">{fr?"ESTIMATION INTERACTIVE":"INTERACTIVE ESTIMATE"}</span><h2>{fr?<>Visualisez les frais.<br/><em>Avant de décider.</em></>:<>See the numbers.<br/><em>Before you decide.</em></>}</h2><p>{fr?"Explorez une estimation indicative des frais de transaction selon le moyen de paiement et le volume choisi. Ce n'est pas un devis.":"Explore an illustrative transaction-fee estimate based on your chosen payment method and monthly transaction volume. This is not a quote."}</p><div className="px-estimate-trust"><ShieldCheck size={22}/><span>{fr?"Calcul basé sur les taux publiés, hors TVA et frais tiers éventuels.":"Based on published rates, excluding VAT and any additional third-party charges."}</span></div></div><div className="px-calculator"><label htmlFor="px-method">{fr?"Moyen de paiement":"Payment method"}</label><select id="px-method" value={method} onChange={e=>setMethod(e.target.value as typeof method)}>{methods.map(m=><option key={m.key} value={m.key}>{fr?m.fr:m.en}</option>)}</select><div className="px-range-head"><label htmlFor="px-volume">{fr?"Volume mensuel estimé":"Estimated monthly volume"}</label><strong>{money(volume)} XAF</strong></div><input id="px-volume" type="range" min="50000" max="2000000" step="50000" value={volume} onChange={e=>setVolume(Number(e.target.value))}/><div className="px-range-ends"><span>50 000 XAF</span><span>2 000 000 XAF</span></div><div className="px-results">{plans.slice(0,3).map(p=>{const rate=parseFloat(p[method]);return <div key={p.name}><span>{p.name} <small>({p[method]})</small></span><strong>{money(Math.round(volume*rate/100))} XAF</strong></div>})}</div><p className="px-calc-note">{fr?"Estimation des seuls frais de transaction sur le volume choisi. Abonnement mensuel non inclus. Les tarifs réels doivent être confirmés auprès de BIAPAY.":"Illustrative transaction fees only for the selected volume. Monthly subscription not included. Confirm actual rates with BIAPAY."}</p></div></div></section>
-<section className="px-compare"><div className="px-container"><div className="px-heading"><div><span className="px-eyebrow">{fr?"TRANSPARENCE":"SIDE BY SIDE"}</span><h2>{fr?"Les détails comptent.":"Details make the difference."}</h2></div><button type="button" onClick={()=>setCompare(!compare)} className="px-compare-toggle" aria-expanded={compare}>{compare?(fr?"Masquer le comparatif":"Hide comparison"):(fr?"Afficher le comparatif":"Compare all plans")} <ArrowRight size={17}/></button></div>{compare&&<div className="px-table-scroll"><table><thead><tr><th>{fr?"Service":"Feature"}</th>{plans.map(p=><th key={p.name}>{p.name}</th>)}</tr></thead><tbody>{rows.map(r=><tr key={r.en}><th scope="row">{fr?r.fr:r.en}</th>{plans.map(p=><td key={p.name}>{r.get(p)}</td>)}</tr>)}</tbody></table></div>}<div className="px-notes"><h3>{fr?"À savoir avant de choisir":"Before you choose"}</h3><div className="px-notes-grid"><div><WalletCards size={23}/><strong>{fr?"Frais de transaction":"Transaction fees"}</strong><p>{fr?"Par défaut, les frais sont supportés par le commerçant, sauf configuration différente.":"By default, fees are borne by the merchant unless configured otherwise."}</p></div><div><ChartNoAxesCombined size={23}/><strong>{fr?"Délais de règlement":"Settlement timing"}</strong><p>{fr?"Les virements bancaires peuvent prendre jusqu'à deux jours ouvrables. Le temps réel indiqué pour Premium concerne les comptes mobile money ou wallets admissibles.":"Bank transfers may take up to two working days. Premium real-time settlement is specified for eligible mobile money accounts or wallets."}</p></div><div><Building2 size={23}/><strong>{fr?"Activation du compte":"Account activation"}</strong><p>{fr?"Un compte de test est attribué à l'inscription ; l'approbation KYC est requise pour les transactions réelles.":"A test plan is assigned at registration; KYC approval is required for live transactions."}</p></div></div></div></div></section>
-<section className="px-cta"><div className="px-container px-cta-grid"><div><span className="px-eyebrow">{fr?"UN CONSEIL PERSONNALISÉ":"LET'S FIND YOUR FIT"}</span><h2>{fr?<>Le bon plan pour<br/><em>votre prochaine étape.</em></>:<>The right plan for<br/><em>what&apos;s next.</em></>}</h2><p>{fr?"Contactez notre équipe pour confirmer les tarifs, la disponibilité et les conditions applicables.":"Speak with our team to confirm pricing, availability and applicable terms."}</p></div><Link href={`/${locale}/contact`} className="px-cta-button">{fr?"Contacter BIAPAY":"Contact BIAPAY"} <ArrowUpRight size={20}/></Link></div></section>
-</main>
+
+type Plan = (typeof plans)[number];
+type CompareRow = {
+  en: string;
+  fr: string;
+  get: (plan: Plan, money: (amount: number) => string) => string;
+};
+
+const compareRows: CompareRow[] = [
+  { en: "Monthly subscription", fr: "Abonnement mensuel", get: (plan, money) => plan.price === null ? "On request" : `${money(plan.price)} XAF` },
+  { en: "Point-of-sale locations", fr: "Points de vente", get: (plan) => plan.pos },
+  { en: "Included sub-users", fr: "Sous-utilisateurs inclus", get: (plan) => plan.users },
+  { en: "Transaction currencies", fr: "Devises de transaction", get: (plan) => plan.currencies },
+  { en: "Settlement frequency", fr: "Fréquence de règlement", get: (plan) => plan.settle },
+  { en: "Local mobile money fee", fr: "Frais mobile money local", get: (plan) => plan.local },
+  { en: "Card payment fee", fr: "Frais de paiement par carte", get: (plan) => plan.cards },
+  { en: "International wallet fee", fr: "Frais des portefeuilles internationaux", get: (plan) => plan.wallets },
+  { en: "Online banking fee", fr: "Frais banque en ligne", get: (plan) => plan.bank },
+  { en: "BIAPAY mobile payment fee", fr: "Frais mobile BIAPAY", get: (plan) => plan.biapay },
+];
+
+const heroImages = [
+  "/assets/hero/handsome-african-supermarket-salesperson-smiling-looking-camera-while-holding-cellphone_536628-1180.jpg",
+  "/assets/hero/photo-black-african-man-having-phone-conversation-while-shopping-store_536628-757.jpg",
+  "/assets/hero/male-fashion-designer-leaning-rack-clothes_13339-111552.jpg",
+  "/assets/hero/artisan-packaging-handmade-soap-products-workshop_1203138-207335.jpg",
+  "/assets/hero/portrait-beautiful-african-american-smiling-cashier-lady-working-grocery-store-looking-camera_505521-561.jpg",
+];
+
+export function PricingExperience({ locale }: { locale: "en" | "fr" }) {
+  const fr = locale === "fr";
+  const [compare, setCompare] = useState(false);
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const interval = window.setInterval(
+      () => setHeroImageIndex((index) => (index + 1) % heroImages.length),
+      3000,
+    );
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const money = (amount: number) => new Intl.NumberFormat(fr ? "fr-FR" : "en-US").format(amount);
+  const localizePlanValue = (value: string) => {
+    if (!fr) return value;
+    const translations: Record<string, string> = {
+      Unlimited: "Illimité",
+      "All available": "Toutes disponibles",
+      "Mon / Wed / Fri": "Lun. / mer. / ven.",
+      Daily: "Quotidien",
+      "Real-time*": "Temps réel*",
+      "By agreement": "Sur accord",
+      Custom: "Personnalisé",
+    };
+    return translations[value] ?? value;
+  };
+
+  return (
+    <div className="px-page">
+      <section className="px-hero" aria-labelledby="px-hero-title">
+        <div className="px-hero-background" aria-hidden="true">
+          {heroImages.map((image, index) => (
+            <div
+              key={image}
+              className={`px-hero-image${index === heroImageIndex ? " is-active" : ""}`}
+              style={{ backgroundImage: `url("${image}")` }}
+            />
+          ))}
+        </div>
+        <div className="px-container px-hero-inner">
+          <h1 id="px-hero-title">
+            {fr ? (
+              <><span className="px-hero-first-line">Recevoir un paiement ne devrait pas</span><br /><em>compliquer votre journée.</em></>
+            ) : (
+              <><span className="px-hero-first-line">Getting paid should not</span><br /><em>complicate your day.</em></>
+            )}
+          </h1>
+          <p>
+            {fr
+              ? "Quand les paiements se dispersent, chaque étape demande plus d'attention. Et si le parcours pouvait être plus clair ?"
+              : "When payments are spread across different places, every step needs more attention. What if the process could be clearer?"}
+          </p>
+          <div className="px-hero-actions">
+            <a href="#plans" className="px-primary">
+              {fr ? "Découvrir les formules" : "Explore plans"} <ArrowRight size={17} />
+            </a>
+            <Link href={`/${locale}/contact`} className="px-secondary">
+              {fr ? "Parler à un conseiller" : "Speak with our team"} <ArrowUpRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <MerchantStory locale={locale} />
+
+      <section id="plans" className="px-plans" aria-labelledby="px-plans-title">
+        <div className="px-container">
+          <div className="px-heading">
+            <div>
+              <h2 id="px-plans-title">
+                {fr ? "Choisissez le forfait qui vous correspond." : "Choose the plan that fits your business."}
+              </h2>
+            </div>
+          </div>
+
+          <div className="px-plan-grid">
+            {plans.map((plan, index) => (
+              <article key={plan.name} className={`px-plan px-plan-${index}`}>
+                <div className="px-plan-top">
+                  <h3>{plan.name}</h3>
+                  <p>
+                    {[
+                      fr ? "Pour commencer à encaisser" : "Start collecting payments",
+                      fr ? "Pour les activités en croissance" : "For growing businesses",
+                      fr ? "Pour les opérations à plus grande échelle" : "For larger-scale operations",
+                      fr ? "Une offre adaptée à vos besoins" : "Tailored to your requirements",
+                    ][index]}
+                  </p>
+                  <div className="px-price">
+                    {plan.price === null ? (
+                      <strong className="px-onrequest">{fr ? "Sur devis" : "On request"}</strong>
+                    ) : (
+                      <>
+                        <strong>{money(plan.price)}</strong>
+                        <span>XAF <small>/ {fr ? "mois" : "month"}</small></span>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="px-plan-features">
+                  <span><Check size={15} />{localizePlanValue(plan.pos)} {fr ? "points de vente" : "POS locations"}</span>
+                  <span><Check size={15} />{localizePlanValue(plan.users)} {fr ? "sous-utilisateurs" : "sub-users"}</span>
+                  <span><Check size={15} />{localizePlanValue(plan.currencies)}</span>
+                  <span>
+                    <Check size={15} />
+                    {fr ? "Règlement : " : "Settlement: "}
+                    {index === 0
+                      ? (fr ? "lun./mer./ven." : "Mon/Wed/Fri")
+                      : index === 1
+                        ? (fr ? "quotidien" : "daily")
+                        : index === 2
+                          ? (fr ? "temps réel*" : "real-time*")
+                          : (fr ? "sur accord" : "by agreement")}
+                  </span>
+                </div>
+                <Link
+                  href={plan.price === null ? `/${locale}/contact` : `/${locale}/register`}
+                  className="px-plan-action"
+                >
+                  {plan.price === null
+                    ? (fr ? "Demander une offre" : "Request a quote")
+                    : (fr ? "Créer mon compte" : "Create an account")}
+                  <ArrowUpRight size={17} />
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="px-disclaimer">
+            <Info size={17} />
+            <p>
+              {fr
+                ? "Les montants affichés proviennent de la grille tarifaire du site BIAPAY existant. Ils sont hors TVA et peuvent avoir changé. La validation KYC est nécessaire pour les transactions réelles. Certaines fonctionnalités et méthodes de paiement sont soumises à disponibilité."
+                : "Figures are from the pricing schedule on BIAPAY's existing website. They exclude VAT and may have changed. KYC approval is required for live transactions. Some features and payment methods are subject to availability."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-compare" aria-labelledby="px-compare-title">
+        <div className="px-container">
+          <div className="px-heading">
+            <div>
+              <h2 id="px-compare-title">{fr ? "Les détails comptent." : "Details make the difference."}</h2>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCompare((value) => !value)}
+              className="px-compare-toggle"
+              aria-expanded={compare}
+            >
+              {compare
+                ? (fr ? "Masquer le comparatif" : "Hide comparison")
+                : (fr ? "Afficher le comparatif" : "Compare all plans")}
+              <ArrowRight size={17} />
+            </button>
+          </div>
+
+          {compare && (
+            <div className="px-table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>{fr ? "Service" : "Feature"}</th>
+                    {plans.map((plan) => <th key={plan.name}>{plan.name}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {compareRows.map((row) => (
+                    <tr key={row.en}>
+                      <th scope="row">{fr ? row.fr : row.en}</th>
+                      {plans.map((plan) => (
+                        <td key={plan.name}>
+                          {row.en === "Monthly subscription" && plan.price === null
+                            ? (fr ? "Sur devis" : "On request")
+                            : localizePlanValue(row.get(plan, money))}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          <div className="px-notes">
+            <h3>{fr ? "À savoir avant de choisir" : "Before you choose"}</h3>
+            <div className="px-notes-grid">
+              <div>
+                <WalletCards size={23} />
+                <strong>{fr ? "Frais de transaction" : "Transaction fees"}</strong>
+                <p>
+                  {fr
+                    ? "Par défaut, les frais sont supportés par le commerçant, sauf configuration différente."
+                    : "By default, fees are borne by the merchant unless configured otherwise."}
+                </p>
+              </div>
+              <div>
+                <ChartNoAxesCombined size={23} />
+                <strong>{fr ? "Délais de règlement" : "Settlement timing"}</strong>
+                <p>
+                  {fr
+                    ? "Les virements bancaires peuvent prendre jusqu'à deux jours ouvrables. Le temps réel indiqué pour Premium concerne les comptes mobile money ou wallets admissibles."
+                    : "Bank transfers may take up to two working days. Premium real-time settlement is specified for eligible mobile money accounts or wallets."}
+                </p>
+              </div>
+              <div>
+                <Building2 size={23} />
+                <strong>{fr ? "Activation du compte" : "Account activation"}</strong>
+                <p>
+                  {fr
+                    ? "Un compte de test est attribué à l'inscription ; l'approbation KYC est requise pour les transactions réelles."
+                    : "A test plan is assigned at registration; KYC approval is required for live transactions."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

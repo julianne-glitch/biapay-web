@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Open_Sans, Raleway } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -12,12 +12,6 @@ import "../globals.css";
 const body = Open_Sans({
   subsets: ["latin", "latin-ext"],
   variable: "--font-body",
-  display: "swap",
-});
-
-const heading = Raleway({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-heading-family",
   display: "swap",
 });
 
@@ -38,7 +32,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
-    icons: { icon: "/assets/brand/biapay-wordmark.png" },
+    icons: { icon: "/assets/brand/biapay-wordmark.webp" },
   };
 }
 
@@ -56,7 +50,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${body.variable} ${heading.variable} h-full`}>
+    <html lang={locale} className={`${body.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-background text-foreground antialiased">
         <NextIntlClientProvider messages={messages}>
           <SiteHeader />

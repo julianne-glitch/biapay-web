@@ -53,6 +53,13 @@ export const shellNav = [
     },
   },
   {
+    key: "agents",
+    href: {
+      fr: "/fr/agents",
+      en: "/en/agents",
+    },
+  },
+  {
     key: "developers",
     href: {
       fr: "/fr/developers",

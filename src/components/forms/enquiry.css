@@ -8,7 +8,10 @@
 .ef-form input:not([type=checkbox]),.ef-form select,.ef-form textarea{font-size:15px;min-height:46px;background:#fff}
 .ef-form textarea{resize:vertical;min-height:135px}
 .ef-form :is(input,select,textarea,button,a):focus-visible{outline:3px solid #559b65;outline-offset:3px}
+.ef-form button{background:#236c49;color:#fff;transition:transform .2s,background .2s}
+.ef-form button:hover{background:#18583b}
 .ef-form button{font-size:14px;min-height:52px}
 .ef-form button:disabled{cursor:wait}
 .ef-details a:hover,.ef-foot a:hover{text-decoration:underline}
 @media(max-width:600px){.ef-intro h1{font-size:clamp(39px,10vw,48px)}.ef-form{border-radius:15px;padding:24px 20px}}
+@media(prefers-reduced-motion:reduce){.ef-form button{transition:none}}

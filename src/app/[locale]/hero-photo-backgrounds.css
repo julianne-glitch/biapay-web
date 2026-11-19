@@ -1,0 +1,184 @@
+.agents-hero,
+.dv-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background: #12392f;
+}
+
+.agents-hero::before,
+.dv-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  pointer-events: none;
+  background-position: center 42%;
+  background-size: cover;
+}
+
+.agents-hero::before {
+  background-image: url("/assets/hero/agnt-2.jpg");
+  animation: agents-hero-photo-cycle 15s infinite;
+}
+
+.dv-hero::before {
+  background-image: url("/assets/hero/dev-1.jpg");
+  animation: developers-hero-photo-cycle 18s infinite;
+}
+
+.agents-hero::after,
+.dv-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, #0d2f28d9 0%, #123e32b8 50%, #0d2f28d9 100%);
+}
+
+.agents-hero-grid,
+.agents-proof,
+.dv-hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.agents-hero {
+  padding: 132px 0 0;
+}
+
+.agents-hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.agents-hero-copy {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 16px 0 26px;
+  text-align: center;
+}
+
+.agents-hero h1 {
+  margin: 24px auto 22px;
+  color: #fff;
+}
+
+.agents-hero h1 em,
+.agents-hero-note svg {
+  color: #bce58a;
+}
+
+.agents-hero-lead,
+.agents-hero-note {
+  color: #e1e9e3;
+}
+
+.agents-hero-lead {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.agents-hero-note {
+  justify-content: center;
+}
+
+.agents-actions {
+  justify-content: center;
+}
+
+.agents-secondary {
+  border: 1px solid #ffffff80;
+  color: #fff;
+}
+
+.agents-secondary:hover {
+  background: #ffffff1a;
+}
+
+.agents-proof {
+  justify-content: center;
+}
+
+.agents-proof span {
+  color: #e1e9e3;
+}
+
+.agents-proof svg {
+  color: #bce58a;
+}
+
+.dv-hero-grid {
+  z-index: 1;
+}
+
+.dv-copy h1 {
+  color: #fff;
+}
+
+.dv-copy h1 em {
+  color: #bce58a;
+}
+
+.dv-hero .dv-copy > p {
+  color: #e1e9e3;
+}
+
+.dv-hero .dv-eyebrow {
+  color: #bce58a;
+}
+
+.dv-proof span {
+  color: #e1e9e3;
+}
+
+.dv-proof svg {
+  color: #bce58a;
+}
+
+.dv-hero .dv-outline {
+  border-color: #ffffff80;
+  color: #fff;
+}
+
+@keyframes agents-hero-photo-cycle {
+  20%, 39.99% { background-image: url("/assets/hero/agnt-2.jpg"); }
+  40%, 59.99% { background-image: url("/assets/hero/agnt-3.jpg"); }
+  60%, 79.99% { background-image: url("/assets/hero/agnt-4.jpg"); }
+  80%, 99.99% { background-image: url("/assets/hero/agnt-5.jpg"); }
+  100% { background-image: url("/assets/hero/agnt-2.jpg"); }
+}
+
+@keyframes developers-hero-photo-cycle {
+  0%, 16.66% { background-image: url("/assets/hero/dev-1.jpg"); }
+  16.67%, 33.33% { background-image: url("/assets/hero/dev-2.jpg"); }
+  33.34%, 49.99% { background-image: url("/assets/hero/dev-3.jpg"); }
+  50%, 66.66% { background-image: url("/assets/hero/dev-4.jpg"); }
+  66.67%, 83.33% { background-image: url("/assets/hero/dev-5.jpg"); }
+  83.34%, 99.99% { background-image: url("/assets/hero/dev-6.jpg"); }
+  100% { background-image: url("/assets/hero/dev-1.jpg"); }
+}
+
+@media (max-width: 680px) {
+  .agents-hero {
+    padding-top: 112px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dv-hero-grid {
+    padding-top: 120px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agents-hero::before,
+  .dv-hero::before {
+    animation: none;
+  }
+}

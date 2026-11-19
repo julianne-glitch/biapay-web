@@ -4,7 +4,7 @@ import {AnimatePresence,motion,useReducedMotion} from "motion/react";
 import {geoMercator,geoPath,geoCentroid,type GeoPermissibleObjects} from "d3-geo";
 import {feature} from "topojson-client";
 import world from "world-atlas/countries-110m.json";
-import {ArrowUpRight,ArrowRight,CheckCircle2,Globe2,MapPin,Pause,Play,ShoppingBag,Ticket,Code2,ReceiptText} from "lucide-react";
+import {ArrowUpRight,ArrowRight,CheckCircle2,MapPin,Pause,Play,ShoppingBag,Ticket,Code2,ReceiptText} from "lucide-react";
 import "./africa-journey.css";
 import "./africa-map-premium.css";
 const destinations=[
@@ -34,7 +34,7 @@ export function AfricaJourney({locale}:{locale:"fr"|"en"}){
  useEffect(()=>{if(!playing||reduce)return;const timer=window.setInterval(()=>setActive(v=>(v+1)%destinations.length),4600);return()=>window.clearInterval(timer)},[playing,reduce]);
  const selected=destinations[active];const Icon=selected.type==="merchant"?ShoppingBag:selected.type==="event"?Ticket:selected.type==="developer"?Code2:ReceiptText;
  return <section className="bp-africa bp-africa-v2" aria-labelledby="bp-africa-title"><div className="bp-shell bp-africa-inner">
-  <div className="bp-africa-copy"><div className="bp-section-label"><Globe2 size={15}/>{fr?"PENSÉ POUR LES AMBITIONS AFRICAINES":"MADE FOR AFRICAN AMBITION"}</div>
+  <div className="bp-africa-copy">
   <h2 id="bp-africa-title">{fr?<>Votre ambition<br/>n’a pas <em>de frontières.</em></>:<>Your ambition<br/>has <em>no borders.</em></>}</h2>
   <p>{fr?"À chaque idée son prochain marché. Explorez comment les liens de paiement, la billetterie, la facturation et les API BIAPAY accompagnent différents parcours.":"Every idea has a next market. Explore how BIAPAY payment links, ticketing, invoicing and APIs fit different business journeys."}</p>
   <div className="bp-africa-route" role="tablist" aria-label={fr?"Explorer les scénarios par ville":"Explore use cases by city"}>{destinations.map((place,i)=><button key={place.code} role="tab" aria-selected={i===active} className={i===active?"selected":""} onClick={()=>{setActive(i);setPlaying(false)}}><span className="bp-route-dot"/>{place.city}</button>)}</div>

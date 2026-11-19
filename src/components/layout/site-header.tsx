@@ -1,53 +1,125 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { buttonVariants } from "@/components/ui/button";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { Link, usePathname } from "@/i18n/navigation";
-import { accountLinks, shellNav, type Locale } from "@/lib/shell-nav";
+import { accountLinks } from "@/lib/shell-nav";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const t = useTranslations("nav");
   const account = useTranslations("account");
-  const locale = useLocale() as Locale;
   const pathname = usePathname();
+  const isOverlayHeroPage = ["/", "/pricing", "/agents", "/developers"].includes(pathname);
+  const isDarkHeroPage = ["/pricing", "/agents", "/developers"].includes(pathname);
   const [open, setOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [overHero, setOverHero] = useState(isOverlayHeroPage);
+  const [overDarkHeroSection, setOverDarkHeroSection] = useState(isDarkHeroPage);
+
+  useEffect(() => {
+    let previousScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - previousScrollY;
+      setCompact(currentScrollY > 24);
+
+      if (open || currentScrollY <= 24) {
+        setHidden(false);
+      } else if (Math.abs(scrollDelta) > 4) {
+        setHidden(scrollDelta > 0);
+      }
+
+      previousScrollY = currentScrollY;
+
+      const darkSections = isOverlayHeroPage
+        ? document.querySelectorAll(
+            ".px-hero, .px-cta, .agents-hero, .dv-hero, .dv-cta, .bp-developer",
+          )
+        : [];
+      const heroSections = isOverlayHeroPage
+        ? document.querySelectorAll(".px-hero, .agents-hero, .dv-hero, .bp-hero2")
+        : [];
+      const headerHeight = document.querySelector("header")?.offsetHeight ?? 84;
+      const intersectsHeader = (section: Element) => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top < headerHeight && bounds.bottom > 0;
+      };
+      const coversHeader = (section: Element) => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= 0 && bounds.bottom >= headerHeight;
+      };
+
+      setOverHero(Array.from(heroSections).some(coversHeader));
+      setOverDarkHeroSection(
+        Array.from(darkSections).some(intersectsHeader),
+      );
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [pathname, isOverlayHeroPage, open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#e6ede4]/80 bg-white/90 backdrop-blur-xl shadow-[0_5px_30px_rgba(18,61,43,.045)]">
-      <div className="mx-auto flex w-full max-w-7xl items-center gap-3 px-5 py-3 lg:gap-5">
-        <Link href="/" className="shrink-0" aria-label="BIAPAY">
+    <header className={cn(
+      "z-40 w-full transition-transform duration-300 ease-in-out motion-reduce:transition-none",
+      isOverlayHeroPage ? "fixed top-0" : "sticky top-0",
+      hidden && !open ? "-translate-y-full pointer-events-none" : "translate-y-0",
+      overHero
+        ? "bg-transparent"
+        : overDarkHeroSection
+          ? "bg-[#102d27] shadow-[0_8px_24px_rgba(15,35,70,0.12)]"
+          : "bg-[#fcfdff] shadow-[0_8px_24px_rgba(15,35,70,0.08)]",
+    )}>
+      <div className={cn(
+        "mx-auto grid w-[calc(100%-6.2vw)] max-w-[1570px] grid-cols-[1fr_auto] items-center gap-4 border-b transition-[min-height] duration-300 motion-reduce:transition-none min-[1200px]:grid-cols-[auto_1fr_auto] max-[1050px]:w-[calc(100%-48px)] max-[760px]:w-[calc(100%-36px)] max-[760px]:max-w-[620px]",
+        isOverlayHeroPage ? "border-transparent" : "border-[#e6ebf4]",
+        compact ? "min-h-[72px]" : "min-h-[84px] min-[1400px]:min-h-[104px]",
+      )}>
+        <Link
+          href="/"
+          transitionTypes={pathname === "/" ? [] : ["page-back"]}
+          aria-label="BIAPAY"
+          aria-current={pathname === "/" ? "page" : undefined}
+          className="w-fit shrink-0"
+        >
           <Image
-            src="/assets/brand/biapay-wordmark.png"
+            src="/assets/brand/biapay-wordmark.webp"
             alt="BIAPAY"
             width={220}
             height={50}
             priority
-            className="h-8 w-auto"
+            className={cn("h-auto w-[clamp(148px,11.8vw,200px)] transition-all duration-300", compact && "w-[clamp(148px,10.2vw,170px)]")}
           />
         </Link>
 
-        <nav aria-label={t("primary")} className="hidden flex-1 lg:block">
-          <NavLinks locale={locale} pathname={pathname} />
+        <nav aria-label={t("primary")} className="hidden min-[1200px]:flex min-[1200px]:justify-center">
+          <NavLinks pathname={pathname} compact={compact} light={overDarkHeroSection} />
         </nav>
 
-        <div className="ml-auto hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-[14px] min-[1200px]:flex min-[1400px]:gap-[20px]">
           <LanguageSwitcher />
           <a
             href={accountLinks.login}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-heading hover:text-navy"
+            className="inline-flex h-[clamp(42px,2.93vw,49px)] items-center whitespace-nowrap rounded-full border-2 border-[#1a4fb4] bg-white px-[clamp(16px,1.2vw,20px)] text-[clamp(13px,.9vw,15px)] font-semibold text-[#14377a] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f3f7ff]"
           >
             {account("login")}
           </a>
           <a
             href={accountLinks.register}
-            className={cn(buttonVariants({ size: "lg" }), "h-10 rounded-full px-4")}
+            className="inline-flex h-[clamp(42px,2.93vw,49px)] items-center whitespace-nowrap rounded-full border-2 border-[#15367f] bg-[#15367f] px-[clamp(16px,1.2vw,20px)] text-[clamp(13px,.9vw,15px)] font-semibold text-white shadow-[0_8px_20px_rgba(21,54,127,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#0f2a69]"
           >
             {account("register")}
           </a>
@@ -55,37 +127,25 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="ml-auto inline-flex size-10 items-center justify-center rounded-full text-heading lg:hidden"
+          className="inline-flex size-10 items-center justify-center justify-self-end rounded-full border border-white/80 bg-white/50 text-[#123f98] shadow-[0_4px_14px_rgba(18,63,152,0.08)] backdrop-blur-md transition-colors hover:bg-white/80 min-[1200px]:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
+          aria-label={open ? t("closeMenu") : t("openMenu")}
           onClick={() => setOpen((value) => !value)}
         >
           {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-          <span className="sr-only">{open ? t("closeMenu") : t("openMenu")}</span>
         </button>
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="border-t border-border px-4 py-4 lg:hidden">
-          <NavLinks
-            locale={locale}
-            pathname={pathname}
-            onNavigate={() => setOpen(false)}
-          />
-          <div className="mt-4 flex flex-col gap-3">
+        <div id="mobile-nav" className="mx-auto mb-4 w-[calc(100%-6.2vw)] max-w-[1570px] rounded-2xl border border-[#e6ebf4] bg-white px-4 py-4 shadow-[0_12px_34px_rgba(8,45,112,.12)] min-[1200px]:hidden max-[1050px]:w-[calc(100%-48px)] max-[760px]:w-[calc(100%-36px)] max-[760px]:max-w-[620px]">
+          <NavLinks pathname={pathname} compact={compact} light={false} onNavigate={() => setOpen(false)} />
+          <div className="mt-4 flex flex-col gap-4 border-t border-[#e5ebf4] pt-4">
             <LanguageSwitcher />
-            <a
-              href={accountLinks.login}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-heading"
-            >
+            <a href={accountLinks.login} target="_blank" rel="noopener noreferrer" className="rounded-full border-2 border-[#1a4fb4] bg-white px-5 py-3 text-center text-sm font-semibold text-[#14377a]">
               {account("login")}
             </a>
-            <a
-              href={accountLinks.register}
-              className={cn(buttonVariants(), "h-10 rounded-full")}
-            >
+            <a href={accountLinks.register} className="rounded-full border-2 border-[#15367f] bg-[#15367f] px-5 py-3 text-center text-sm font-semibold text-white">
               {account("register")}
             </a>
           </div>
@@ -96,66 +156,58 @@ export function SiteHeader() {
 }
 
 function NavLinks({
-  locale,
   pathname,
+  compact,
+  light,
   onNavigate,
 }: {
-  locale: Locale;
   pathname: string;
+  compact: boolean;
+  light: boolean;
   onNavigate?: () => void;
 }) {
   const t = useTranslations("nav");
+  const items = [
+    { key: "merchants", href: "/pricing", active: pathname.startsWith("/pricing"), chevron: false },
+    { key: "agents", href: "/agents", active: pathname.startsWith("/agents"), chevron: false },
+    { key: "developers", href: "/developers", active: pathname.startsWith("/developers"), chevron: false },
+    { key: "about", href: "/about", active: pathname.startsWith("/about"), chevron: false },
+    { key: "support", href: "/resources", active: pathname.startsWith("/resources"), chevron: true },
+  ] as const;
 
   return (
-    <ul className="flex flex-col gap-1 lg:flex-row lg:flex-nowrap lg:items-center lg:gap-1">
-      <li><a href={`/${locale}/solutions`} className="rounded-full px-3 py-2 text-sm font-medium text-heading hover:bg-accent">{locale==="fr"?"Produits":"Products"}</a></li>
-      {shellNav.filter((item) => ["solutions","developers","pricing","about"].includes(item.key)).map((item) => {
-        const label = t(item.key);
-        const current = item.key === "home" && pathname === "/";
-        const className = cn(
-          "rounded-full px-3 py-2 text-sm font-medium text-heading hover:bg-accent",
-          current && "bg-accent",
-        );
-
-        if ("internal" in item) {
-          return (
-            <li key={item.key}>
-              <Link
-                href="/"
-                aria-current={current ? "page" : undefined}
-                className={className}
-                onClick={onNavigate}
-              >
-                {label}
-              </Link>
-            </li>
-          );
-        }
-        if (item.key === "about") {
-          const submenu = [
-            {slug:"about",en:"Our story",fr:"Notre histoire"},
-            {slug:"careers",en:"Careers",fr:"Carrières"},
-            {slug:"partners",en:"Our partners",fr:"Nos partenaires"},
-            {slug:"legal",en:"Legal center",fr:"Centre juridique"},
-            {slug:"terms",en:"Terms & conditions",fr:"Conditions générales"},
-            {slug:"privacy",en:"Privacy policy",fr:"Confidentialité"},
-          ];
-          return <li key={item.key} className="group relative">
-            <a href={item.href[locale]} className={className} onClick={onNavigate}>{label} <span aria-hidden="true">⌄</span></a>
-            <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-[#e1eadb] bg-white p-2 shadow-[0_18px_45px_#123e3222] lg:invisible lg:absolute lg:left-0 lg:top-full lg:z-50 lg:mt-0 lg:min-w-[220px] lg:translate-y-2 lg:opacity-0 lg:transition-all lg:group-hover:visible lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-within:visible lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100">
-              {submenu.map(sub=><a key={sub.slug} href={"/"+locale+"/"+sub.slug} onClick={onNavigate} className="rounded-xl px-3 py-2 text-sm text-[#214d39] transition-colors hover:bg-[#eef7e8]">{locale==="fr"?sub.fr:sub.en}</a>)}
-            </div>
-          </li>;
-        }
-
-        return (
-          <li key={item.key}>
-            <a href={item.href[locale]} className={className} onClick={onNavigate}>
-              {label}
-            </a>
-          </li>
-        );
-      })}
+    <ul className="flex flex-col gap-1 min-[1200px]:flex-row min-[1200px]:items-center min-[1200px]:gap-[clamp(9px,.8vw,12px)]">
+      {items.map((item) => (
+        <li key={item.key}>
+          <Link
+            href={item.href}
+            transitionTypes={
+              item.key === "merchants"
+                ? pathname === "/"
+                  ? ["merchant-forward"]
+                  : pathname === "/pricing"
+                    ? ["merchant-back"]
+                    : []
+                : []
+            }
+            onClick={onNavigate}
+            aria-current={item.active ? "page" : undefined}
+            className={cn(
+              "relative flex items-center gap-1 py-2 text-[clamp(12.5px,.95vw,15px)] font-semibold transition-colors after:pointer-events-none after:absolute after:bottom-[-10px] after:left-[3%] after:h-[11px] after:w-[94%] after:rounded-t-[50%] after:border-t-[3px] after:border-[#6bb52f] after:opacity-0 after:transition-all after:duration-300 motion-reduce:after:transition-none max-[1199px]:px-3 max-[1199px]:after:bottom-[-5px] max-[1199px]:after:h-[7px] max-[1199px]:after:left-[12%] max-[1199px]:after:w-[76%]",
+              light ? "text-white hover:text-[#d4f0a3]" : "text-[#15367f] hover:text-[#15367f]/80",
+              item.active &&
+                cn(
+                  light ? "font-bold text-[#6bb52f]" : "font-bold text-[#15367f]",
+                  "after:opacity-100",
+                  compact ? "after:-translate-y-0.5" : "after:translate-y-0",
+                ),
+            )}
+          >
+            {t(item.key)}
+            {item.chevron ? <ChevronDown aria-hidden="true" className="size-[1em] stroke-[2.5]" /> : null}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }

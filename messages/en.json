@@ -8,17 +8,22 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "home": "Home",
-    "about": "About BIAPAY",
+    "about": "About",
+    "merchants": "For Merchants",
+    "customers": "For Customers",
+    "support": "Support",
+    "agents": "Agents",
     "news": "News | Blog",
     "gateway": "Gateway",
     "solutions": "Solutions",
     "pricing": "Pricing",
     "developers": "Developers",
-    "help": "Help Center"
+    "help": "Help Center",
+    "products": "Products"
   },
   "account": {
-    "login": "Login",
-    "register": "Register"
+    "login": "Sign in",
+    "register": "Create an account"
   },
   "language": {
     "label": "Language",
@@ -52,5 +57,25 @@
     "twitter": "Twitter",
     "linkedin": "Linkedin",
     "youtube": "Youtube"
+  },
+  "hero": {
+    "kicker": "For merchants",
+    "title": "All your payments together in one",
+    "accent": "single wallet.",
+    "lead": "Mobile Money, bank cards and international payments: give your customers the freedom to pay their preferred way and receive your collections directly in your BIAPAY Wallet.",
+    "leadStrong": "Mobile Money, bank cards and international payments:",
+    "leadRest": "give your customers the freedom to pay their preferred way and receive your collections directly in your BIAPAY Wallet.",
+    "cta1": "Create my merchant account",
+    "cta2": "Explore our solutions",
+    "merchant": "Merchant",
+    "methodsTitle": "Customers pay with",
+    "mobileMoney": "Mobile Money",
+    "bankCards": "Bank card",
+    "wallets": "Wallets",
+    "bankTransfers": "Bank transfer",
+    "otherPayments": "Other methods",
+    "cemac": "CEMAC & International",
+    "availability": "Available payment methods vary by country and merchant setup.",
+    "flowLabel": "Customer payment methods converging into BIAPAY and the merchant's wallet."
   }
 }

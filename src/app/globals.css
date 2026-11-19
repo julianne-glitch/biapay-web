@@ -145,10 +145,10 @@
   }
 }
 /* BIAPAY site-wide editorial typography system ? shared across all locales. */
-:root{--biapay-display:Georgia,"Times New Roman",serif;--biapay-reading:var(--font-body),"Open Sans",Arial,sans-serif;--biapay-type-ink:#243b32}
+:root{--font-heading-family:var(--font-body);--biapay-display:var(--biapay-reading);--biapay-reading:var(--font-body),"Open Sans",Arial,sans-serif;--biapay-type-ink:#243b32}
 html{font-family:var(--biapay-reading);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 body,button,input,select,textarea{font-family:var(--biapay-reading)}
-/* Display hierarchy: serif for section storytelling, sans for utility and cards. */
+/* Display hierarchy: shared site heading font for storytelling, body font for utility and cards. */
 main h1,main h2{font-family:var(--biapay-display)!important;font-weight:500!important;letter-spacing:-.045em!important;line-height:1.14}
 main h3,main h4,main h5,main h6{font-family:var(--biapay-reading)!important;font-weight:650!important;letter-spacing:-.025em}
 main h1 em,main h2 em{font-family:inherit;font-weight:inherit}
@@ -156,3 +156,84 @@ main p{line-height:1.75}
 main :is(a,button,input,select,textarea){font-family:var(--biapay-reading)}
 main :is(button,a){text-underline-offset:3px}
 @media(max-width:640px){main h1,main h2{letter-spacing:-.035em!important;line-height:1.16}}
+
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.solution-forward),
+::view-transition-old(.merchant-forward),
+::view-transition-old(.page-forward) {
+  animation: 280ms cubic-bezier(.4, 0, .2, 1) both page-exit-forward;
+}
+
+::view-transition-new(.solution-forward),
+::view-transition-new(.merchant-forward),
+::view-transition-new(.page-forward) {
+  animation: 620ms cubic-bezier(.22, .61, .36, 1) 40ms both page-enter-forward;
+}
+
+::view-transition-old(.solution-back),
+::view-transition-old(.merchant-back),
+::view-transition-old(.page-back) {
+  animation: 280ms cubic-bezier(.4, 0, .2, 1) both page-exit-back;
+}
+
+::view-transition-new(.solution-back),
+::view-transition-new(.merchant-back),
+::view-transition-new(.page-back) {
+  animation: 620ms cubic-bezier(.22, .61, .36, 1) 40ms both page-enter-back;
+}
+
+@keyframes page-exit-forward {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+
+@keyframes page-enter-forward {
+  from {
+    opacity: 0;
+    transform: translateX(72px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes page-exit-back {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+
+@keyframes page-enter-back {
+  from {
+    opacity: 0;
+    transform: translateX(-72px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

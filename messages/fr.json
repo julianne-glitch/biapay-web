@@ -9,16 +9,21 @@
     "closeMenu": "Fermer le menu",
     "home": "Accueil",
     "about": "À propos",
+    "merchants": "Je suis commerçant",
+    "customers": "Pour les Clients",
+    "support": "Support",
+    "agents": "Agents",
     "news": "News | Blog",
     "gateway": "Passerelle",
     "solutions": "Solutions",
     "pricing": "Tarif",
     "developers": "Développeurs",
-    "help": "Help Center"
+    "help": "Help Center",
+    "products": "Produits"
   },
   "account": {
-    "login": "Connexion",
-    "register": "S'inscrire"
+    "login": "Se connecter",
+    "register": "Créer un compte"
   },
   "language": {
     "label": "Langue",
@@ -52,5 +57,25 @@
     "twitter": "Twitter",
     "linkedin": "Linkedin",
     "youtube": "Youtube"
+  },
+  "hero": {
+    "kicker": "Pour les marchands",
+    "title": "Tous vos paiements réunis dans un",
+    "accent": "seul wallet.",
+    "lead": "Mobile Money, cartes bancaires et paiements internationaux : offrez à vos clients la liberté de payer avec leur moyen préféré et recevez vos encaissements directement dans votre Wallet BIAPAY.",
+    "leadStrong": "Mobile Money, cartes bancaires et paiements internationaux :",
+    "leadRest": "offrez à vos clients la liberté de payer avec leur moyen préféré et recevez vos encaissements directement dans votre Wallet BIAPAY.",
+    "cta1": "Créer mon compte marchand",
+    "cta2": "Découvrir nos solutions",
+    "merchant": "Marchand",
+    "methodsTitle": "Vos clients paient par",
+    "mobileMoney": "Mobile Money",
+    "bankCards": "Carte bancaire",
+    "wallets": "Wallets",
+    "bankTransfers": "Virement",
+    "otherPayments": "Autres moyens",
+    "cemac": "CEMAC & International",
+    "availability": "Les moyens de paiement disponibles varient selon le pays et la configuration du marchand.",
+    "flowLabel": "Moyens de paiement clients convergeant vers BIAPAY et le wallet du marchand."
   }
 }

@@ -22,6 +22,10 @@
 .bp-products{background:#f7faf6;padding:clamp(72px,7vw,100px) 0}
 .bp-product-grid{gap:18px}
 .bp-product-card{border-color:#e1e9e2;border-radius:16px;min-height:245px;box-shadow:0 5px 18px #1c4b3210}
+.biapay-premium .bp-product-card{isolation:isolate;overflow:hidden;background:transparent}
+.biapay-premium .bp-product-card-image{z-index:-2;object-fit:cover;filter:blur(4px) saturate(.85);opacity:.52;transform:scale(1.08);transition:opacity .25s,transform .4s}
+.biapay-premium .bp-product-card:before{position:absolute;inset:0;z-index:-1;background:rgba(255,255,255,.68);content:"";pointer-events:none}
+.biapay-premium .bp-product-card:hover .bp-product-card-image{opacity:.64;transform:scale(1.12)}
 .bp-product-card:hover{transform:translateY(-4px);box-shadow:0 18px 35px #173e2b17}
 .bp-product-icon{background:#edf5e9;color:#347a4b;border-radius:13px}
 .bp-product-card h3{font-weight:750;color:#173c47}
