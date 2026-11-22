@@ -12,7 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroFlow, HeroDecor } from "./hero-flow";
 import { useTranslations } from "next-intl";
-import { accountLinks } from "@/lib/shell-nav";
+import { accountLinks, developerDocsUrl } from "@/lib/shell-nav";
 import { solutionCatalog } from "@/lib/solution-catalog";
 import { PartnerCarousel } from "./partner-carousel";
 import { HomeFaq } from "./home-faq";
@@ -87,7 +87,7 @@ export function PremiumHome({ locale }: { locale: Locale }) {
         };
     }, []);
 
-    const source = (slug: string) => `/${locale}/${slug === "payment-gateway" || slug === "payment-solutions" ? "solutions" : slug === "developers" ? "developers" : slug === "pricing-3" || slug === "pricing-2" ? "pricing" : slug === "about-biapay" ? "about" : slug === "contact" ? "contact" : "solutions"}`;
+    const source = (slug: string) => slug === "developers" ? developerDocsUrl : `/${locale}/${slug === "payment-gateway" || slug === "payment-solutions" ? "solutions" : slug === "pricing-3" || slug === "pricing-2" ? "pricing" : slug === "about-biapay" ? "about" : slug === "contact" ? "contact" : "solutions"}`;
     return <main className="biapay-premium">
         <section className="bp-hero2" aria-labelledby="hero-title">
             <HeroDecor />
@@ -103,7 +103,6 @@ export function PremiumHome({ locale }: { locale: Locale }) {
                     <p className="bp-lead2"><strong>{hero("leadStrong")}</strong> {hero("leadRest")}</p>
                     <div className="bp-hero2-actions">
                         <a className="bp-h2-primary" href={accountLinks.register}><User aria-hidden="true" strokeWidth={2.2} />{hero("cta1")} <ArrowRight size={17} aria-hidden="true" /></a>
-                        <a className="bp-h2-secondary" href={source("payment-solutions")}>{hero("cta2")} <ArrowRight size={17} aria-hidden="true" /></a>
                     </div>
                 </div>
                 <HeroFlow />

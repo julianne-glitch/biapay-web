@@ -13,8 +13,8 @@ export function SiteHeader() {
   const t = useTranslations("nav");
   const account = useTranslations("account");
   const pathname = usePathname();
-  const isOverlayHeroPage = ["/", "/pricing", "/agents", "/developers"].includes(pathname);
-  const isDarkHeroPage = ["/pricing", "/agents", "/developers"].includes(pathname);
+  const isOverlayHeroPage = ["/", "/pricing", "/agents"].includes(pathname);
+  const isDarkHeroPage = ["/pricing", "/agents"].includes(pathname);
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -39,11 +39,11 @@ export function SiteHeader() {
 
       const darkSections = isOverlayHeroPage
         ? document.querySelectorAll(
-            ".px-hero, .px-cta, .agents-hero, .dv-hero, .dv-cta, .bp-developer",
+            ".px-hero, .px-cta, .agents-hero, .agents-trust-section, .bp-developer",
           )
         : [];
       const heroSections = isOverlayHeroPage
-        ? document.querySelectorAll(".px-hero, .agents-hero, .dv-hero, .bp-hero2")
+        ? document.querySelectorAll(".px-hero, .agents-hero, .bp-hero2")
         : [];
       const headerHeight = document.querySelector("header")?.offsetHeight ?? 84;
       const intersectsHeader = (section: Element) => {
@@ -168,46 +168,50 @@ function NavLinks({
 }) {
   const t = useTranslations("nav");
   const items = [
+    { key: "home", href: "/", active: pathname === "/", chevron: false },
     { key: "merchants", href: "/pricing", active: pathname.startsWith("/pricing"), chevron: false },
     { key: "agents", href: "/agents", active: pathname.startsWith("/agents"), chevron: false },
-    { key: "developers", href: "/developers", active: pathname.startsWith("/developers"), chevron: false },
     { key: "about", href: "/about", active: pathname.startsWith("/about"), chevron: false },
     { key: "support", href: "/resources", active: pathname.startsWith("/resources"), chevron: true },
   ] as const;
 
   return (
     <ul className="flex flex-col gap-1 min-[1200px]:flex-row min-[1200px]:items-center min-[1200px]:gap-[clamp(9px,.8vw,12px)]">
-      {items.map((item) => (
-        <li key={item.key}>
-          <Link
-            href={item.href}
-            transitionTypes={
-              item.key === "merchants"
-                ? pathname === "/"
-                  ? ["merchant-forward"]
-                  : pathname === "/pricing"
-                    ? ["merchant-back"]
-                    : []
-                : []
-            }
-            onClick={onNavigate}
-            aria-current={item.active ? "page" : undefined}
-            className={cn(
-              "relative flex items-center gap-1 py-2 text-[clamp(12.5px,.95vw,15px)] font-semibold transition-colors after:pointer-events-none after:absolute after:bottom-[-10px] after:left-[3%] after:h-[11px] after:w-[94%] after:rounded-t-[50%] after:border-t-[3px] after:border-[#6bb52f] after:opacity-0 after:transition-all after:duration-300 motion-reduce:after:transition-none max-[1199px]:px-3 max-[1199px]:after:bottom-[-5px] max-[1199px]:after:h-[7px] max-[1199px]:after:left-[12%] max-[1199px]:after:w-[76%]",
-              light ? "text-white hover:text-[#d4f0a3]" : "text-[#15367f] hover:text-[#15367f]/80",
-              item.active &&
-                cn(
-                  light ? "font-bold text-[#6bb52f]" : "font-bold text-[#15367f]",
-                  "after:opacity-100",
-                  compact ? "after:-translate-y-0.5" : "after:translate-y-0",
-                ),
-            )}
-          >
-            {t(item.key)}
-            {item.chevron ? <ChevronDown aria-hidden="true" className="size-[1em] stroke-[2.5]" /> : null}
-          </Link>
-        </li>
-      ))}
+      {items.map((item) => {
+        const className = cn(
+          "relative flex items-center gap-1 py-2 text-[clamp(12.5px,.95vw,15px)] font-semibold transition-colors after:pointer-events-none after:absolute after:bottom-[-10px] after:left-[3%] after:h-[11px] after:w-[94%] after:rounded-t-[50%] after:border-t-[3px] after:border-[#6bb52f] after:opacity-0 after:transition-all after:duration-300 motion-reduce:after:transition-none max-[1199px]:px-3 max-[1199px]:after:bottom-[-5px] max-[1199px]:after:h-[7px] max-[1199px]:after:left-[12%] max-[1199px]:after:w-[76%]",
+          light ? "text-white hover:text-[#d4f0a3]" : "text-[#15367f] hover:text-[#15367f]/80",
+          item.active &&
+            cn(
+              light ? "font-bold text-[#6bb52f]" : "font-bold text-[#15367f]",
+              "after:opacity-100",
+              compact ? "after:-translate-y-0.5" : "after:translate-y-0",
+            ),
+        );
+
+        return (
+          <li key={item.key}>
+            <Link
+              href={item.href}
+              transitionTypes={
+                item.key === "merchants"
+                  ? pathname === "/"
+                    ? ["merchant-forward"]
+                    : pathname === "/pricing"
+                      ? ["merchant-back"]
+                      : []
+                  : []
+              }
+              onClick={onNavigate}
+              aria-current={item.active ? "page" : undefined}
+              className={className}
+            >
+              {t(item.key)}
+              {item.chevron ? <ChevronDown aria-hidden="true" className="size-[1em] stroke-[2.5]" /> : null}
+            </Link>
+          </li>
+        );
+      })}
     </ul>
   );
 }

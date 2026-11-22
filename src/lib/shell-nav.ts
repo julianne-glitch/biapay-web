@@ -11,6 +11,8 @@ export const accountLinks = {
   register: "https://connect.biapay.net/login",
 } as const;
 
+export const developerDocsUrl = "https://biapay-docs.biapay.net";
+
 export const companyLink = "https://www.groupebia.com/";
 
 type LocaleHref = Record<Locale, string>;
@@ -62,8 +64,8 @@ export const shellNav = [
   {
     key: "developers",
     href: {
-      fr: "/fr/developers",
-      en: "/en/developers",
+      fr: developerDocsUrl,
+      en: developerDocsUrl,
     },
   },
   {

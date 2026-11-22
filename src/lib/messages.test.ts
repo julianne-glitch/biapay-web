@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import en from "../../messages/en.json";
 import fr from "../../messages/fr.json";
-import { shellNav } from "./shell-nav";
+import { developerDocsUrl, shellNav } from "./shell-nav";
 
 function leafKeys(value: unknown, prefix = ""): string[] {
   if (value && typeof value === "object" && !Array.isArray(value)) {
@@ -23,5 +23,12 @@ describe("locale messages", () => {
       expect(fr.nav[item.key].length).toBeGreaterThan(0);
       expect(en.nav[item.key].length).toBeGreaterThan(0);
     }
+  });
+
+  it("points developer navigation to the documentation site", () => {
+    expect(shellNav).toContainEqual({
+      key: "developers",
+      href: { fr: developerDocsUrl, en: developerDocsUrl },
+    });
   });
 });
