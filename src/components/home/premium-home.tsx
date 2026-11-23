@@ -8,9 +8,11 @@ import "./landing-finish.css";
 import "./developer-editorial.css";
 import "./classic-home.css";
 import "./hero-section.css";
+import "./mobile-home.css";
 import Image from "next/image";
 import Link from "next/link";
 import { HeroFlow, HeroDecor } from "./hero-flow";
+import { MobilePaymentPreview } from "./mobile-payment-preview";
 import { useTranslations } from "next-intl";
 import { accountLinks, developerDocsUrl } from "@/lib/shell-nav";
 import { solutionCatalog } from "@/lib/solution-catalog";
@@ -41,8 +43,16 @@ export function PremiumHome({ locale }: { locale: Locale }) {
         document.body.appendChild(overlay);
 
         let activeHeading: HTMLElement | null = null;
+        const mobileHome = window.matchMedia("(max-width: 760px)");
 
         const update = () => {
+            if (mobileHome.matches) {
+                activeHeading?.classList.remove("bp-title-pinned-source");
+                activeHeading = null;
+                overlay.hidden = true;
+                return;
+            }
+
             let nextHeading: HTMLElement | null = null;
 
             for (const heading of headings) {
@@ -94,18 +104,21 @@ export function PremiumHome({ locale }: { locale: Locale }) {
             <div className="bp-hero2-inner">
                 <div className="bp-hero2-copy">
                     <h1 id="hero-title">
-                        <span>{hero("title")}</span>
-                        <em>
+                        <span className="bp-mobile-headline">{fr ? "Encaissez." : "Get paid."} <em>{fr ? "Allez plus loin." : "Keep growing."}</em></span>
+                        <span className="bp-desktop-headline">{hero("title")}</span>
+                        <em className="bp-desktop-headline">
                             {hero("accent")}
                             <svg className="bp-hero2-underline" viewBox="0 0 240 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10 C 50 3, 150 1, 238 8" /></svg>
                         </em>
                     </h1>
+                    <p className="bp-mobile-lead">{fr ? "Encaissez en ligne et en boutique, depuis une seule plateforme." : "Accept payments online and in store from one platform."}</p>
                     <p className="bp-lead2"><strong>{hero("leadStrong")}</strong> {hero("leadRest")}</p>
                     <div className="bp-hero2-actions">
                         <a className="bp-h2-primary" href={accountLinks.register}><User aria-hidden="true" strokeWidth={2.2} />{hero("cta1")} <ArrowRight size={17} aria-hidden="true" /></a>
                     </div>
                 </div>
                 <HeroFlow />
+                <MobilePaymentPreview locale={locale} />
             </div>
         </section>
 

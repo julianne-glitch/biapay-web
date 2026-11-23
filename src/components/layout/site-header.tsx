@@ -72,7 +72,7 @@ export function SiteHeader() {
   return (
     <header className={cn(
       "z-40 w-full transition-transform duration-300 ease-in-out motion-reduce:transition-none",
-      isOverlayHeroPage ? "fixed top-0" : "sticky top-0",
+      isOverlayHeroPage ? "bp-home-header fixed top-0" : "sticky top-0",
       hidden && !open ? "-translate-y-full pointer-events-none" : "translate-y-0",
       overHero
         ? "bg-transparent"

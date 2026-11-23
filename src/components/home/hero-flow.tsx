@@ -87,11 +87,11 @@ export function HeroFlow() {
         </ul>
 
         <div className="hf-hub">
-          <Image src="/assets/brand/biapay-wordmark.webp" alt="BIAPAY" width={220} height={50} priority />
+          <Image src="/assets/brand/biapay-wordmark.webp" alt="BIAPAY" width={220} height={50} />
         </div>
 
         <div className="hf-photo">
-          <Image src="/assets/hero/hero-merchant-photo.webp" alt="" fill priority sizes="(max-width: 1050px) 90vw, 28vw" />
+          <Image src="/assets/hero/hero-merchant-photo.webp" alt="" fill sizes="(max-width: 1050px) 90vw, 28vw" />
         </div>
       </div>
     </div>
