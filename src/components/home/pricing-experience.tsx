@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -42,29 +43,9 @@ const compareRows: CompareRow[] = [
   { en: "BIAPAY mobile payment fee", fr: "Frais mobile BIAPAY", get: (plan) => plan.biapay },
 ];
 
-const heroImages = [
-  "/assets/hero/handsome-african-supermarket-salesperson-smiling-looking-camera-while-holding-cellphone_536628-1180.jpg",
-  "/assets/hero/photo-black-african-man-having-phone-conversation-while-shopping-store_536628-757.jpg",
-  "/assets/hero/male-fashion-designer-leaning-rack-clothes_13339-111552.jpg",
-  "/assets/hero/artisan-packaging-handmade-soap-products-workshop_1203138-207335.jpg",
-  "/assets/hero/portrait-beautiful-african-american-smiling-cashier-lady-working-grocery-store-looking-camera_505521-561.jpg",
-];
-
 export function PricingExperience({ locale }: { locale: "en" | "fr" }) {
   const fr = locale === "fr";
   const [compare, setCompare] = useState(false);
-  const [heroImageIndex, setHeroImageIndex] = useState(0);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const interval = window.setInterval(
-      () => setHeroImageIndex((index) => (index + 1) % heroImages.length),
-      3000,
-    );
-    return () => window.clearInterval(interval);
-  }, []);
-
   const money = (amount: number) => new Intl.NumberFormat(fr ? "fr-FR" : "en-US").format(amount);
   const localizePlanValue = (value: string) => {
     if (!fr) return value;
@@ -83,36 +64,46 @@ export function PricingExperience({ locale }: { locale: "en" | "fr" }) {
   return (
     <div className="px-page">
       <section className="px-hero" aria-labelledby="px-hero-title">
-        <div className="px-hero-background" aria-hidden="true">
-          {heroImages.map((image, index) => (
-            <div
-              key={image}
-              className={`px-hero-image${index === heroImageIndex ? " is-active" : ""}`}
-              style={{ backgroundImage: `url("${image}")` }}
-            />
-          ))}
-        </div>
         <div className="px-container px-hero-inner">
-          <h1 id="px-hero-title">
-            {fr ? (
-              <><span className="px-hero-first-line">Recevoir un paiement ne devrait pas</span><br /><em>compliquer votre journée.</em></>
-            ) : (
-              <><span className="px-hero-first-line">Getting paid should not</span><br /><em>complicate your day.</em></>
-            )}
-          </h1>
-          <p>
-            {fr
-              ? "Quand les paiements se dispersent, chaque étape demande plus d'attention. Et si le parcours pouvait être plus clair ?"
-              : "When payments are spread across different places, every step needs more attention. What if the process could be clearer?"}
-          </p>
-          <div className="px-hero-actions">
-            <a href="#plans" className="px-primary">
-              {fr ? "Découvrir les formules" : "Explore plans"} <ArrowRight size={17} />
-            </a>
-            <Link href={`/${locale}/contact`} className="px-secondary">
-              {fr ? "Parler à un conseiller" : "Speak with our team"} <ArrowUpRight size={16} />
-            </Link>
+          <div className="px-hero-copy">
+            <h1 id="px-hero-title">
+              {fr ? (
+                <><span className="px-hero-first-line">Recevoir un paiement ne devrait pas</span><br /><em>compliquer votre journée.</em></>
+              ) : (
+                <><span className="px-hero-first-line">Getting paid should not</span><br /><em>complicate your day.</em></>
+              )}
+            </h1>
+            <p>
+              {fr
+                ? "Quand les paiements se dispersent, chaque étape demande plus d'attention. Et si le parcours pouvait être plus clair ?"
+                : "When payments are spread across different places, every step needs more attention. What if the process could be clearer?"}
+            </p>
+            <div className="px-hero-actions">
+              <a href="#plans" className="px-primary">
+                {fr ? "Découvrir les formules" : "Explore plans"} <ArrowRight size={17} />
+              </a>
+              <Link href={`/${locale}/contact`} className="px-secondary">
+                {fr ? "Parler à un conseiller" : "Speak with our team"} <ArrowUpRight size={16} />
+              </Link>
+            </div>
           </div>
+          <figure className="px-merchant-photo">
+            <Image
+              src="/assets/hero/douala-shopkeeper.webp"
+              alt={fr ? "Un commerçant prépare du pain dans sa boutique à Douala" : "A shopkeeper prepares bread in his shop in Douala"}
+              width={1080}
+              height={605}
+              sizes="(max-width: 760px) calc(100vw - 48px), 440px"
+              priority
+            />
+            <figcaption>
+              {fr ? "Une boutique à Douala" : "A shop in Douala"} ·{" "}
+              <a href="https://commons.wikimedia.org/wiki/File:Boutiquier.jpg">Minette Lontsie</a>
+              {" · "}
+              <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+              {fr ? " (redimensionnée)" : " (resized)"}
+            </figcaption>
+          </figure>
         </div>
       </section>
 

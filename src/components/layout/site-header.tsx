@@ -13,13 +13,12 @@ export function SiteHeader() {
   const t = useTranslations("nav");
   const account = useTranslations("account");
   const pathname = usePathname();
-  const isOverlayHeroPage = ["/", "/pricing", "/agents"].includes(pathname);
-  const isDarkHeroPage = ["/pricing", "/agents"].includes(pathname);
+  const isOverlayHeroPage = pathname === "/";
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [overHero, setOverHero] = useState(isOverlayHeroPage);
-  const [overDarkHeroSection, setOverDarkHeroSection] = useState(isDarkHeroPage);
+  const [overDarkHeroSection, setOverDarkHeroSection] = useState(false);
 
   useEffect(() => {
     let previousScrollY = window.scrollY;
@@ -39,11 +38,11 @@ export function SiteHeader() {
 
       const darkSections = isOverlayHeroPage
         ? document.querySelectorAll(
-            ".px-hero, .agents-hero, .agents-trust-section, .bp-developer",
+            ".bp-developer",
           )
         : [];
       const heroSections = isOverlayHeroPage
-        ? document.querySelectorAll(".px-hero, .agents-hero, .bp-hero2")
+        ? document.querySelectorAll(".bp-hero2")
         : [];
       const headerHeight = document.querySelector("header")?.offsetHeight ?? 84;
       const intersectsHeader = (section: Element) => {

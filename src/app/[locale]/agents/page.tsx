@@ -13,7 +13,6 @@ import { isLocale } from "@/lib/shell-nav";
 import { PageTransition } from "@/components/layout/page-transition";
 import { AgentImagePreview } from "./agent-image-preview";
 import "./agents.css";
-import "../hero-photo-backgrounds.css";
 
 export async function generateMetadata({
   params,

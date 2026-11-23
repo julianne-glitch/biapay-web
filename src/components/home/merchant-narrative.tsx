@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
 import {
   ArrowDownToLine,
   ChartNoAxesCombined,
@@ -49,10 +48,6 @@ export function MerchantStory({ locale }: MerchantNarrativeProps) {
       description: fr
         ? "Entre les demandes des clients et les différents moyens de paiement, recevoir un règlement ne devrait pas devenir une recherche sans fin."
         : "Between customer requests and different ways to pay, receiving a payment should not feel like a never-ending search.",
-      image: "/assets/hero/pb-1.jpg",
-      alt: fr
-        ? "Commerçante dans sa boutique, concentrée sur son téléphone"
-        : "Shop owner in her store, focused on her phone",
     },
     {
       title: fr
@@ -61,10 +56,6 @@ export function MerchantStory({ locale }: MerchantNarrativeProps) {
       description: fr
         ? "Comparer les options, comprendre la configuration et préparer l'intégration peut détourner votre attention de votre activité."
         : "Comparing options, understanding setup and preparing an integration can take focus away from running your business.",
-      image: "/assets/hero/pb-2.jpg",
-      alt: fr
-        ? "Commerçant préoccupé dans sa boutique"
-        : "Concerned shop owner in his store",
     },
     {
       title: fr
@@ -73,10 +64,6 @@ export function MerchantStory({ locale }: MerchantNarrativeProps) {
       description: fr
         ? "Sans une meilleure visibilité sur les opérations, il devient plus difficile de suivre les paiements et de garder le contrôle."
         : "Without better visibility into operations, it becomes harder to follow payments and stay in control.",
-      image: "/assets/hero/pb-3.jpg",
-      alt: fr
-        ? "Commerçante vérifiant son téléphone dans son atelier"
-        : "Shop owner checking her phone in her workspace",
     },
   ];
 
@@ -113,17 +100,14 @@ export function MerchantStory({ locale }: MerchantNarrativeProps) {
 
   return (
     <>
-      <section className="px-story" aria-labelledby="px-story-title">
+      <section className="px-story" aria-label={fr ? "Les besoins des commerçants" : "Merchant needs"}>
         <div className="px-container">
           <div className="px-story-scenes">
-            {scenes.map((scene, index) => (
+            {scenes.map((scene) => (
               <article className="px-story-scene px-story-reveal" key={scene.title}>
                 <div className="px-story-copy">
                   <h3>{scene.title}</h3>
                   <p>{scene.description}</p>
-                </div>
-                <div className={`px-story-visual${index % 2 === 1 ? " px-story-visual-reversed" : ""}`}>
-                  <Image src={scene.image} alt={scene.alt} fill sizes="(max-width: 760px) 100vw, 52vw" />
                 </div>
               </article>
             ))}

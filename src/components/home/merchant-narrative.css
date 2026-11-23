@@ -78,38 +78,6 @@
   margin: 0;
 }
 
-.px-story-visual {
-  position: relative;
-  min-height: 340px;
-  aspect-ratio: 1.48;
-  overflow: hidden;
-  border: 1px solid #ffffff20;
-  border-radius: 22px;
-  background: var(--brand-ink);
-  box-shadow: 0 35px 100px #00000055;
-}
-
-.px-story-visual::after {
-  position: absolute;
-  inset: 30% 0 0;
-  background: linear-gradient(0deg, color-mix(in srgb, var(--brand-ink) 85.1%, transparent), transparent);
-  content: "";
-  pointer-events: none;
-}
-
-.px-story-visual img {
-  object-fit: cover;
-  transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.px-story-scene:hover .px-story-visual img {
-  transform: scale(1.035);
-}
-
-.px-story-visual-reversed {
-  order: -1;
-}
-
 .px-reveal {
   position: relative;
   display: flex;
@@ -418,14 +386,6 @@
     grid-template-columns: 1fr;
   }
 
-  .px-story-visual-reversed {
-    order: 0;
-  }
-
-  .px-story-visual {
-    min-height: 260px;
-  }
-
   .px-reveal,
   .px-reveal-layout {
     min-height: 0;
@@ -452,10 +412,6 @@
     min-height: 230px;
   }
 
-  .px-story-visual {
-    min-height: 220px;
-  }
-
   .px-plan-grid {
     grid-template-columns: 1fr;
   }
@@ -473,7 +429,6 @@
     transition: none;
   }
 
-  .px-story-visual img,
   .px-benefit-card {
     transition: none;
   }
@@ -522,16 +477,6 @@
 .px-benefit-card p,
 .px-notes-grid p {
   color: #596b7d;
-}
-
-.px-story-visual {
-  border-color: #e4e9ef;
-  background: var(--brand-blue-soft);
-  box-shadow: 0 20px 55px color-mix(in srgb, var(--brand-ink) 7.1%, transparent);
-}
-
-.px-story-visual::after {
-  display: none;
 }
 
 .px-reveal {
@@ -692,5 +637,34 @@
 
   .px-hero-first-line {
     white-space: normal;
+  }
+}
+
+.px-story {
+  padding-block: clamp(42px, 6vw, 72px);
+}
+
+.px-story-scenes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.px-story-scene {
+  display: block;
+  padding: 22px;
+  border: 1px solid var(--brand-blue-border);
+  border-radius: 14px;
+  background: white;
+}
+
+.px-story-copy h3 {
+  margin: 0 0 10px;
+  font-size: clamp(19px, 2.3vw, 26px);
+  text-wrap: pretty;
+}
+
+@media (max-width: 760px) {
+  .px-story-scenes {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

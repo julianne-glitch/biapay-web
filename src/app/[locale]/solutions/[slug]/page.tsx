@@ -65,8 +65,6 @@ export default async function SolutionDetailPage({
         description={detail.description}
         sectionTitle={detail.sectionTitle}
         items={detail.items}
-        image={solution.image}
-        transitionName={`solution-image-${solution.id}`}
         backHref={`/${locale}#solutions`}
         backLabel={locale === "fr" ? "Toutes les solutions" : "All solutions"}
       />
