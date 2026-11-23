@@ -248,3 +248,12 @@ main :is(button,a){text-underline-offset:3px}
     animation-delay: 0s !important;
   }
 }
+
+
+html {
+  scroll-padding-top: 84px;
+}
+
+@media (max-width: 760px) {
+  html { scroll-padding-top: 68px; }
+}

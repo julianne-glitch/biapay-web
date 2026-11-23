@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -13,84 +13,17 @@ export function SiteHeader() {
   const t = useTranslations("nav");
   const account = useTranslations("account");
   const pathname = usePathname();
-  const isOverlayHeroPage = pathname === "/";
   const [open, setOpen] = useState(false);
-  const [compact, setCompact] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [overHero, setOverHero] = useState(isOverlayHeroPage);
-  const [overDarkHeroSection, setOverDarkHeroSection] = useState(false);
-
-  useEffect(() => {
-    let previousScrollY = window.scrollY;
-
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
-      const scrollDelta = currentScrollY - previousScrollY;
-      setCompact(currentScrollY > 24);
-
-      if (open || currentScrollY <= 24) {
-        setHidden(false);
-      } else if (Math.abs(scrollDelta) > 4) {
-        setHidden(scrollDelta > 0);
-      }
-
-      previousScrollY = currentScrollY;
-
-      const darkSections = isOverlayHeroPage
-        ? document.querySelectorAll(
-            ".bp-developer",
-          )
-        : [];
-      const heroSections = isOverlayHeroPage
-        ? document.querySelectorAll(".bp-hero2")
-        : [];
-      const headerHeight = document.querySelector("header")?.offsetHeight ?? 84;
-      const intersectsHeader = (section: Element) => {
-        const bounds = section.getBoundingClientRect();
-        return bounds.top < headerHeight && bounds.bottom > 0;
-      };
-      const coversHeader = (section: Element) => {
-        const bounds = section.getBoundingClientRect();
-        return bounds.top <= 0 && bounds.bottom >= headerHeight;
-      };
-
-      setOverHero(Array.from(heroSections).some(coversHeader));
-      setOverDarkHeroSection(
-        Array.from(darkSections).some(intersectsHeader),
-      );
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [pathname, isOverlayHeroPage, open]);
 
   return (
-    <header className={cn(
-      "z-40 w-full transition-transform duration-300 ease-in-out motion-reduce:transition-none",
-      isOverlayHeroPage ? "bp-home-header fixed top-0" : "sticky top-0",
-      hidden && !open ? "-translate-y-full pointer-events-none" : "translate-y-0",
-      overHero
-        ? "bg-transparent"
-        : overDarkHeroSection
-          ? "bg-[var(--brand-ink)] shadow-[0_8px_24px_rgba(15,35,70,0.12)]"
-          : "bg-[var(--brand-blue-soft)] shadow-[0_8px_24px_rgba(15,35,70,0.08)]",
-    )}>
-      <div className={cn(
-        "mx-auto grid w-[calc(100%-6.2vw)] max-w-[1570px] grid-cols-[1fr_auto] items-center gap-4 border-b transition-[min-height] duration-300 motion-reduce:transition-none min-[1200px]:grid-cols-[auto_1fr_auto] max-[1050px]:w-[calc(100%-48px)] max-[760px]:w-[calc(100%-36px)] max-[760px]:max-w-[620px]",
-        isOverlayHeroPage ? "border-transparent" : "border-[var(--brand-blue-border)]",
-        compact ? "min-h-[72px]" : "min-h-[84px] min-[1400px]:min-h-[104px]",
-      )}>
+    <header className="sticky top-0 z-40 w-full border-b border-[var(--brand-blue-border)] bg-white">
+      <div className="mx-auto grid min-h-[64px] w-[calc(100%-36px)] max-w-[1570px] grid-cols-[1fr_auto] items-center gap-4 min-[761px]:min-h-[80px] min-[761px]:w-[calc(100%-6.2vw)] min-[1200px]:grid-cols-[auto_1fr_auto]">
         <Link
           href="/"
           transitionTypes={pathname === "/" ? [] : ["page-back"]}
           aria-label="BIAPAY"
           aria-current={pathname === "/" ? "page" : undefined}
-          className={cn("w-fit shrink-0", overDarkHeroSection && "rounded-xl bg-white px-3 py-2")}
+          className="w-fit shrink-0"
         >
           <Image
             src="/assets/brand/biapay-wordmark.webp"
@@ -98,12 +31,12 @@ export function SiteHeader() {
             width={220}
             height={50}
             priority
-            className={cn("h-auto w-[clamp(148px,11.8vw,200px)] transition-all duration-300", compact && "w-[clamp(148px,10.2vw,170px)]")}
+            className="h-auto w-[clamp(140px,11.8vw,190px)]"
           />
         </Link>
 
         <nav aria-label={t("primary")} className="hidden min-[1200px]:flex min-[1200px]:justify-center">
-          <NavLinks pathname={pathname} compact={compact} light={overDarkHeroSection} />
+          <NavLinks pathname={pathname} />
         </nav>
 
         <div className="hidden items-center gap-[14px] min-[1200px]:flex min-[1400px]:gap-[20px]">
@@ -137,8 +70,8 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="mx-auto mb-4 w-[calc(100%-6.2vw)] max-w-[1570px] rounded-2xl border border-[var(--brand-blue-border)] bg-white px-4 py-4 shadow-[0_12px_34px_rgba(8,45,112,.12)] min-[1200px]:hidden max-[1050px]:w-[calc(100%-48px)] max-[760px]:w-[calc(100%-36px)] max-[760px]:max-w-[620px]">
-          <NavLinks pathname={pathname} compact={compact} light={false} onNavigate={() => setOpen(false)} />
+        <nav id="mobile-nav" aria-label={t("primary")} className="absolute inset-x-[18px] top-full mx-auto mt-2 max-h-[calc(100dvh-90px)] max-w-[620px] overflow-y-auto rounded-2xl border border-[var(--brand-blue-border)] bg-white p-4 shadow-[0_12px_34px_rgba(8,45,112,.12)] min-[1200px]:hidden">
+          <NavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
           <div className="mt-4 flex flex-col gap-4 border-t border-[var(--brand-blue-border)] pt-4">
             <LanguageSwitcher />
             <a href={accountLinks.login} target="_blank" rel="noopener noreferrer" className="rounded-full border-2 border-[var(--brand-blue)] bg-white px-5 py-3 text-center text-sm font-semibold text-[var(--brand-blue-hover)]">
@@ -148,7 +81,7 @@ export function SiteHeader() {
               {account("register")}
             </a>
           </div>
-        </div>
+        </nav>
       ) : null}
     </header>
   );
@@ -156,13 +89,9 @@ export function SiteHeader() {
 
 function NavLinks({
   pathname,
-  compact,
-  light,
   onNavigate,
 }: {
   pathname: string;
-  compact: boolean;
-  light: boolean;
   onNavigate?: () => void;
 }) {
   const t = useTranslations("nav");
@@ -179,13 +108,8 @@ function NavLinks({
       {items.map((item) => {
         const className = cn(
           "relative flex items-center gap-1 py-2 text-[clamp(12.5px,.95vw,15px)] font-semibold transition-colors after:pointer-events-none after:absolute after:bottom-[-10px] after:left-[3%] after:h-[11px] after:w-[94%] after:rounded-t-[50%] after:border-t-[3px] after:border-[var(--brand-green-dark)] after:opacity-0 after:transition-all after:duration-300 motion-reduce:after:transition-none max-[1199px]:px-3 max-[1199px]:after:bottom-[-5px] max-[1199px]:after:h-[7px] max-[1199px]:after:left-[12%] max-[1199px]:after:w-[76%]",
-          light ? "text-white hover:text-[var(--brand-green-light)]" : "text-[var(--brand-blue-hover)] hover:text-[var(--brand-blue-hover)]/80",
-          item.active &&
-            cn(
-              light ? "font-bold text-[var(--brand-green-light)]" : "font-bold text-[var(--brand-blue-hover)]",
-              "after:opacity-100",
-              compact ? "after:-translate-y-0.5" : "after:translate-y-0",
-            ),
+          "text-[var(--brand-blue-hover)] hover:text-[var(--brand-blue-hover)]/80",
+          item.active && "font-bold after:opacity-100",
         );
 
         return (

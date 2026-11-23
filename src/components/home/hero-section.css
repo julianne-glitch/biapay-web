@@ -1,4 +1,4 @@
-.bp-hero2{--hero-navy:var(--brand-blue-hover);--hero-green:var(--brand-green-dark);--header-overlay-offset:84px;--hero-header-gap:6px;position:relative;padding:calc(clamp(32px,3.35vw,56px) + var(--header-overlay-offset) + var(--hero-header-gap)) 0 clamp(28px,3.2vw,46px);overflow:hidden;background:var(--brand-blue-soft)}
+.bp-hero2{--hero-navy:var(--brand-blue-hover);--hero-green:var(--brand-green-dark);position:relative;padding:clamp(32px,3.35vw,56px) 0 clamp(28px,3.2vw,46px);overflow:hidden;background:var(--brand-blue-soft)}
 .bp-hero2-decor{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
 .bp-hero2-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,min(43vw,660px)) minmax(0,1fr);align-items:center;gap:clamp(18px,2.1vw,35px);width:min(1570px,calc(100% - 6.2vw));margin-inline:auto}
 .bp-hero2-copy{padding-top:0}
@@ -31,23 +31,13 @@
  .bp-hero2-actions a{font-size:15px}
 }
 @media(max-width:760px){
- .bp-hero2{padding-top:calc(34px + var(--header-overlay-offset) + var(--hero-header-gap))}
+
  .bp-hero2-inner{gap:28px;width:min(620px,calc(100% - 36px))}
  .bp-hero2-copy{text-align:left}
  .bp-hero2 h1{font-size:clamp(34px,9.2vw,48px)}
  .bp-hero2-actions a{flex:1 1 100%}
 }
 @media(prefers-reduced-motion:reduce){.bp-hero2-actions a{transition:none}}
-@media(min-width:1400px){.bp-hero2{--header-overlay-offset:104px}}
-
-.bp-sticky-title-overlay{position:fixed;top:80px;left:0;right:0;z-index:30;border-bottom:1px solid var(--brand-blue-border);background:var(--brand-blue-soft);box-shadow:0 8px 24px rgba(15,35,70,.08);pointer-events:none}
-.bp-sticky-title-overlay[hidden]{display:none}
-.bp-sticky-title-label{display:block;width:min(1570px,calc(100% - 6.2vw));margin-inline:auto;padding:12px 0;color:var(--brand-blue-hover);font-size:clamp(22px,2.6vw,36px);font-weight:750;letter-spacing:-.045em;line-height:1.15;animation:bp-sticky-title-enter 180ms ease-out both}
-.bp-title-pinned-source{opacity:0!important}
-@keyframes bp-sticky-title-enter{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
-@media(max-width:760px){.bp-sticky-title-label{width:calc(100% - 36px);font-size:21px;padding:10px 0}}
-@media(prefers-reduced-motion:reduce){.bp-sticky-title-label{animation:none}}
-
 /* Section rhythm for the rest of the home page (unchanged from before) */
 .biapay-premium{--bp-home-section-space:clamp(64px,5.56vw,80px)}
 .biapay-premium>.bp-products,.biapay-premium>.bp-africa.bp-africa-v2,.biapay-premium>.bp-connected,.biapay-premium>.bp-last-cta{padding-block:var(--bp-home-section-space)}
