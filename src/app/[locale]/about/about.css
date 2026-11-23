@@ -1,7 +1,294 @@
-.about-page{color:var(--brand-ink);overflow:hidden}.about-container{max-width:1200px;margin:auto;padding-left:26px;padding-right:26px}.about-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:850;letter-spacing:.17em;color:var(--brand-green-dark)}.about-page h1,.about-page h2{font-size:clamp(40px,5.2vw,75px);font-weight:850;letter-spacing:-.065em;line-height:1.08}.about-page h2{font-size:clamp(36px,4.4vw,62px)}.about-page h1 em,.about-page h2 em{font-style:normal;color:var(--brand-green-dark)}.about-page p{color:#6a8074;font-size:16px;line-height:1.85}.about-hero{background:radial-gradient(ellipse at 90% 12%,var(--brand-green-border),transparent 55%),var(--brand-green-soft);padding:80px 0 95px}.about-hero h1{margin:22px 0 25px}.about-hero p{max-width:520px;margin-bottom:30px}.about-primary{display:inline-flex;align-items:center;gap:12px;border-radius:40px;background:var(--brand-green);color:var(--brand-ink);font-size:14px;font-weight:850;padding:15px 24px;transition:transform .3s,box-shadow .3s}.about-primary:hover{transform:translateY(-3px);box-shadow:0 12px 24px color-mix(in srgb, var(--brand-green) 25.1%, transparent)}.about-journey{padding:100px 0 110px;background:#fff}.about-journey h2{margin:20px 0 55px}.about-timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;position:relative}.about-timeline:before{content:'';position:absolute;top:39px;left:0;right:0;height:1px;background:var(--brand-green-border)}.about-timeline article{position:relative;padding-top:5px}.about-timeline article:before{content:'';position:absolute;top:34px;left:0;width:11px;height:11px;border-radius:50%;background:var(--brand-green);box-shadow:0 0 0 6px var(--brand-green-border)}.about-timeline article>strong{display:block;color:var(--brand-green-dark);font-size:15px;font-weight:900;letter-spacing:.04em;margin-bottom:47px}.about-timeline h3{font-size:21px;letter-spacing:-.03em;font-weight:800;margin-bottom:12px}.about-timeline p{font-size:14px}.about-mission{background:var(--brand-ink);color:#fff;padding:100px 0}.about-mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:75px}.about-mission h2{margin-top:20px}.about-mission p{color:#c5d9cb}.about-values{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}.about-values span{display:flex;align-items:center;gap:12px;padding:18px 14px;border:1px solid #ffffff25;border-radius:16px;color:var(--brand-green-soft);font-size:12px;font-weight:750}.about-values svg{width:22px;color:var(--brand-green-dark);flex-shrink:0}.about-culture{padding:100px 0;background:var(--brand-green-soft)}.about-culture h2{margin:18px 0 22px}.about-parent{display:flex;flex-direction:column;gap:5px;padding:22px;margin-top:30px;background:white;border:1px solid var(--brand-green-border);border-radius:18px}.about-parent small{font-size:10px;letter-spacing:.13em;color:var(--brand-green-dark);font-weight:850}.about-parent strong{font-size:18px}.about-parent span{font-size:12px;color:#789081}.about-cta{text-align:center;background:#fff;padding:95px 0 110px}.about-cta h2{margin:20px 0}.about-cta p{margin-bottom:25px}@media(max-width:850px){.about-mission-grid{grid-template-columns:1fr;gap:35px}.about-hero{padding:55px 0}.about-journey,.about-mission,.about-culture,.about-cta{padding:65px 0}.about-timeline{gap:18px}}@media(max-width:580px){.about-container{padding-left:20px;padding-right:20px}.about-page p{font-size:14px}.about-hero h1{font-size:clamp(39px,10vw,53px)}.about-timeline{grid-template-columns:1fr;gap:25px}.about-timeline:before{left:6px;top:20px;bottom:10px;width:1px;height:auto}.about-timeline article{padding:0 0 0 30px}.about-timeline article:before{left:1px;top:9px}.about-timeline article>strong{margin:0 0 12px}.about-values{grid-template-columns:1fr 1fr;gap:8px}.about-values span{padding:12px;font-size:11px}}@media(prefers-reduced-motion:reduce){.about-primary{transition:none}}
-.about-mission h2{color:#fff}.about-mission h2 em{color:var(--brand-green-dark)}
+.about-page {
+  --about-section-space: clamp(54px, 7vw, 100px);
+  color: var(--brand-ink);
+}
 
-.about-hero-grid > div,
-.about-culture-grid > div {
-  max-width: 740px;
+.about-container {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--brand-blue);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .13em;
+}
+
+.about-eyebrow::before {
+  width: 12px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--brand-green);
+  content: "";
+}
+
+.about-page h1,
+.about-page h2 {
+  color: var(--brand-ink);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.about-page h1 {
+  margin: 15px 0 20px;
+  font-size: clamp(39px, 5vw, 70px);
+}
+
+.about-page h2 {
+  margin: 12px 0 20px;
+  font-size: clamp(32px, 4vw, 53px);
+}
+
+.about-page h1 em,
+.about-page h2 em {
+  color: var(--brand-blue);
+  font-style: normal;
+}
+
+.about-page p {
+  color: var(--foreground);
+  font-size: 16px;
+}
+
+.about-hero,
+.about-journey,
+.about-mission,
+.about-culture,
+.about-cta {
+  padding-block: var(--about-section-space);
+}
+
+.about-hero,
+.about-culture {
+  background: var(--brand-blue-soft);
+}
+
+.about-hero-grid,
+.about-culture-grid,
+.about-mission-grid {
+  display: grid;
+  align-items: center;
+  gap: clamp(30px, 6vw, 82px);
+}
+
+.about-hero-grid {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+}
+
+.about-culture-grid {
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+}
+
+.about-mission-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.about-hero p {
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+.about-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 40px;
+  background: var(--brand-blue);
+  color: white;
+  padding: 13px 20px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.about-primary:hover {
+  background: var(--brand-blue-hover);
+}
+
+.about-photo {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  min-width: 0;
+}
+
+.about-photo-tailor {
+  width: min(100%, 500px);
+  justify-self: end;
+  padding-right: 12px;
+}
+
+.about-photo-artisans {
+  width: min(100%, 430px);
+  padding-left: 12px;
+}
+
+.about-photo::before {
+  position: absolute;
+  z-index: -1;
+  top: 12px;
+  bottom: 31px;
+  width: 76%;
+  border-radius: 16px;
+  background: var(--brand-green);
+  content: "";
+}
+
+.about-photo-tailor::before { right: 0; }
+.about-photo-artisans::before { left: 0; }
+
+.about-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.about-photo figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 14px;
+  color: var(--foreground);
+  font-size: 11px;
+}
+
+.about-photo figcaption strong {
+  color: var(--brand-ink);
+  font-size: 13px;
+}
+
+.about-photo figcaption a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.about-journey {
+  scroll-margin-top: 88px;
+}
+
+.about-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.about-timeline article,
+.about-values span,
+.about-parent {
+  border: 1px solid var(--brand-blue-border);
+  border-radius: 14px;
+  background: white;
+}
+
+.about-timeline article {
+  padding: 22px;
+  border-top: 3px solid var(--brand-green);
+}
+
+.about-timeline article > strong {
+  color: var(--brand-blue);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.about-timeline h3 {
+  margin: 8px 0;
+  color: var(--brand-ink);
+  font-size: 20px;
+}
+
+.about-timeline p {
+  font-size: 14px;
+}
+
+.about-mission {
+  background: var(--brand-ink);
+}
+
+.about-mission h2,
+.about-mission p,
+.about-mission .about-eyebrow {
+  color: white;
+}
+
+.about-mission h2 em {
+  color: var(--brand-green-light);
+}
+
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.about-values span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  color: var(--brand-ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.about-values svg {
+  width: 19px;
+  flex: none;
+  color: var(--brand-blue);
+}
+
+.about-parent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 22px;
+  padding: 16px 18px;
+}
+
+.about-parent small {
+  color: var(--brand-blue);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.about-parent span {
+  color: var(--foreground);
+  font-size: 13px;
+}
+
+.about-cta {
+  text-align: center;
+  background: var(--brand-green-soft);
+}
+
+.about-cta p {
+  margin-bottom: 22px;
+}
+
+@media (max-width: 760px) {
+  .about-hero-grid,
+  .about-mission-grid,
+  .about-culture-grid,
+  .about-timeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-photo-tailor {
+    justify-self: start;
+  }
+
+  .about-photo-artisans {
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 375px) {
+  .about-values {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
