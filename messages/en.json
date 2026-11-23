@@ -67,6 +67,7 @@
     "leadRest": "give your customers the freedom to pay their preferred way and receive your collections directly in your BIAPAY Wallet.",
     "cta1": "Create my merchant account",
     "merchant": "Merchant",
+    "flowHint": "Tap a payment method to see how it reaches your wallet.",
     "methodsTitle": "Customers pay with",
     "mobileMoney": "Mobile Money",
     "bankCards": "Bank card",

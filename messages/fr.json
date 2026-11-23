@@ -67,6 +67,7 @@
     "leadRest": "offrez à vos clients la liberté de payer avec leur moyen préféré et recevez vos encaissements directement dans votre Wallet BIAPAY.",
     "cta1": "Créer mon compte marchand",
     "merchant": "Marchand",
+    "flowHint": "Touchez un moyen de paiement pour voir son parcours vers votre wallet.",
     "methodsTitle": "Vos clients paient par",
     "mobileMoney": "Mobile Money",
     "bankCards": "Carte bancaire",
