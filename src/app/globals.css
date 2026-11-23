@@ -52,28 +52,39 @@
 }
 
 :root {
-  /* Sampled from the live biapay.net theme CSS on 2026-11-16. */
+  /* Exact flat colors from assets/brand/biapay-wordmark.png. */
+  --brand-blue: #2a457d;
+  --brand-green: #96c939;
+  --brand-ink: color-mix(in srgb, var(--brand-blue) 54%, #080f1b);
+  --brand-blue-hover: color-mix(in srgb, var(--brand-blue) 78%, #080f1b);
+  --brand-blue-soft: color-mix(in srgb, var(--brand-blue) 7%, white);
+  --brand-blue-border: color-mix(in srgb, var(--brand-blue) 15%, white);
+  --brand-green-dark: color-mix(in srgb, var(--brand-green) 39%, var(--brand-ink));
+  --brand-green-hover: color-mix(in srgb, var(--brand-green) 83%, white);
+  --brand-green-light: color-mix(in srgb, var(--brand-green) 63%, white);
+  --brand-green-border: color-mix(in srgb, var(--brand-green) 25%, white);
+  --brand-green-soft: color-mix(in srgb, var(--brand-green) 10%, white);
   --background: #ffffff;
   --foreground: #57647c;
-  --heading: #0e314c;
-  --navy: #2a457d;
+  --heading: var(--brand-ink);
+  --navy: var(--brand-blue);
   --footer: #070d13;
   --card: #ffffff;
-  --card-foreground: #0e314c;
+  --card-foreground: var(--brand-ink);
   --popover: #ffffff;
-  --popover-foreground: #0e314c;
-  --primary: #96c939;
-  --primary-foreground: #ffffff;
-  --secondary: #2a457d;
+  --popover-foreground: var(--brand-ink);
+  --primary: var(--brand-green);
+  --primary-foreground: var(--brand-ink);
+  --secondary: var(--brand-blue);
   --secondary-foreground: #ffffff;
-  --muted: color-mix(in srgb, #0e314c 4%, #ffffff);
+  --muted: color-mix(in srgb, var(--brand-ink) 4%, #ffffff);
   --muted-foreground: #57647c;
-  --accent: color-mix(in srgb, #96c939 18%, #ffffff);
-  --accent-foreground: #0e314c;
+  --accent: var(--brand-green-soft);
+  --accent-foreground: var(--brand-ink);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: color-mix(in srgb, #0e314c 14%, #ffffff);
-  --input: color-mix(in srgb, #0e314c 14%, #ffffff);
-  --ring: #96c939;
+  --border: color-mix(in srgb, var(--brand-ink) 14%, #ffffff);
+  --input: color-mix(in srgb, var(--brand-ink) 14%, #ffffff);
+  --ring: var(--brand-blue);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -145,7 +156,7 @@
   }
 }
 /* BIAPAY site-wide editorial typography system ? shared across all locales. */
-:root{--font-heading-family:var(--font-body);--biapay-display:var(--biapay-reading);--biapay-reading:var(--font-body),"Open Sans",Arial,sans-serif;--biapay-type-ink:#243b32}
+:root{--font-heading-family:var(--font-body);--biapay-display:var(--biapay-reading);--biapay-reading:var(--font-body),"Open Sans",Arial,sans-serif;--biapay-type-ink:var(--brand-ink)}
 html{font-family:var(--biapay-reading);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 body,button,input,select,textarea{font-family:var(--biapay-reading)}
 /* Display hierarchy: shared site heading font for storytelling, body font for utility and cards. */

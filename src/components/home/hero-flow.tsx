@@ -44,11 +44,11 @@ const methods: Method[] = [
 
 /** Wire gradients: [colour at the card, colour at the hub]. */
 const wireColors: Record<Method["tone"], [string, string]> = {
-  blue: ["#3d7ffc", "#3d7ffc"],
-  green: ["#3fc65a", "#3d7ffc"],
-  purple: ["#a342f4", "#3d7ffc"],
+  blue: ["var(--brand-blue)", "var(--brand-blue)"],
+  green: ["var(--brand-green)", "var(--brand-blue)"],
+  purple: ["#a342f4", "var(--brand-blue)"],
   amber: ["#ffbe4a", "#f5604f"],
-  teal: ["#1fb6c9", "#3d7ffc"],
+  teal: ["var(--brand-blue)", "var(--brand-blue)"],
   orange: ["#ff9f3a", "#f5604f"],
 };
 
@@ -104,15 +104,15 @@ export function HeroDecor() {
     <svg className="bp-hero2-decor" viewBox="0 0 1672 837" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
       <defs>
         <radialGradient id="hd-halo" cx="50%" cy="50%" r="50%">
-          <stop offset="0" stopColor="#e9f0ff" />
-          <stop offset="0.7" stopColor="#f0f5ff" />
-          <stop offset="1" stopColor="#f6f9ff" stopOpacity="0" />
+          <stop offset="0" stopColor="var(--brand-blue-border)" />
+          <stop offset="0.7" stopColor="var(--brand-blue-soft)" />
+          <stop offset="1" stopColor="var(--brand-blue-soft)" stopOpacity="0" />
         </radialGradient>
       </defs>
       <ellipse cx="1430" cy="360" rx="520" ry="360" fill="url(#hd-halo)" />
-      <circle cx="1740" cy="250" r="270" fill="#e5f2dc" />
-      <path d="M1160 837 C 1330 780 1500 700 1672 610 L 1672 837 Z" fill="#e1f0d6" />
-      <path d="M1250 837 C 1400 800 1540 760 1672 714 L 1672 837 Z" fill="#14388c" />
+      <circle cx="1740" cy="250" r="270" fill="var(--brand-green-border)" />
+      <path d="M1160 837 C 1330 780 1500 700 1672 610 L 1672 837 Z" fill="var(--brand-green-border)" />
+      <path d="M1250 837 C 1400 800 1540 760 1672 714 L 1672 837 Z" fill="var(--brand-blue)" />
     </svg>
   );
 }

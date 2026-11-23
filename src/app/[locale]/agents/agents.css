@@ -1,9 +1,9 @@
 .agents-page {
-  --agents-navy: #102d50;
-  --agents-ink: #122a46;
+  --agents-navy: var(--brand-ink);
+  --agents-ink: var(--brand-ink);
   --agents-muted: #617185;
-  --agents-green: #89c52f;
-  --agents-green-dark: #6ea51e;
+  --agents-green: var(--brand-green);
+  --agents-green-dark: var(--brand-green-dark);
   --agents-line: #e4e9e3;
   color: var(--agents-ink);
   overflow: hidden;
@@ -65,8 +65,8 @@
 }
 
 .agents-image-lightbox {
-  --agents-navy: #102d50;
-  --agents-green-dark: #6ea51e;
+  --agents-navy: var(--brand-ink);
+  --agents-green-dark: var(--brand-green-dark);
   position: fixed;
   z-index: 100;
   inset: 0;
@@ -146,7 +146,7 @@
   padding: clamp(56px, 7vw, 94px) 0 0;
   background:
     radial-gradient(ellipse at 86% 32%, rgba(137, 197, 47, 0.13), transparent 34%),
-    linear-gradient(132deg, #f8faf6 0%, #f5f8fc 56%, #f0f5e9 100%);
+    linear-gradient(132deg, var(--brand-green-soft) 0%, var(--brand-blue-soft) 56%, var(--brand-green-soft) 100%);
 }
 
 .agents-hero-grid {
@@ -203,7 +203,7 @@
   flex: 0 0 auto;
   place-items: center;
   border-radius: 12px;
-  background: #edf6e3;
+  background: var(--brand-green-soft);
   color: var(--agents-green-dark);
 }
 
@@ -302,13 +302,13 @@
   padding: 0 20px;
   background: var(--agents-green);
   box-shadow: 0 9px 22px rgba(110, 165, 30, 0.19);
-  color: #132d45;
+  color: var(--brand-ink);
   transition: background-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
 
 .agents-primary:hover {
   transform: translateY(-2px);
-  background: #98d342;
+  background: var(--brand-green);
   box-shadow: 0 12px 26px rgba(110, 165, 30, 0.24);
 }
 
@@ -360,7 +360,7 @@
 }
 
 .agents-kicker {
-  color: #71874f;
+  color: var(--brand-green-dark);
 }
 
 .agents-section-heading h2,
@@ -433,7 +433,7 @@
 }
 
 .agents-features-section {
-  background: #f5f8f3;
+  background: var(--brand-green-soft);
 }
 
 .agents-feature-grid {
@@ -601,7 +601,7 @@
 }
 
 .agents-trust-section .agents-kicker {
-  color: #b7d68c;
+  color: var(--brand-green-light);
 }
 
 .agents-trust-section h2 {
@@ -609,7 +609,7 @@
 }
 
 .agents-trust-section h2 em {
-  color: #a4d75b;
+  color:var(--brand-green-dark);
 }
 
 .agents-trust-grid {
@@ -630,7 +630,7 @@
 .agents-trust-card > span {
   display: block;
   margin-bottom: 22px;
-  color: #acd36e;
+  color:var(--brand-green-dark);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -638,7 +638,7 @@
 
 .agents-trust-card > svg {
   margin-bottom: 13px;
-  color: #acd36e;
+  color:var(--brand-green-dark);
 }
 
 .agents-trust-card h3 {
@@ -698,7 +698,7 @@
 }
 
 .agents-page a:focus-visible {
-  outline: 3px solid #5b8d21;
+  outline: 3px solid var(--brand-green-dark);
   outline-offset: 3px;
 }
 

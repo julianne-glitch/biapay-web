@@ -1,6 +1,6 @@
 .bp-faq {
   padding-block: clamp(64px, 7vw, 88px);
-  background: linear-gradient(135deg, #f3f8f0, #f7faf6 58%, #edf4ea);
+  background: linear-gradient(135deg, var(--brand-green-soft), var(--brand-green-soft) 58%, var(--brand-green-soft));
 }
 
 .bp-faq-layout {
@@ -18,7 +18,7 @@
 
 .bp-faq-heading h2 {
   margin: 0;
-  color: #123f35;
+  color: var(--brand-ink);
   font-size: clamp(32px, 3.8vw, 48px);
   font-weight: 750;
   letter-spacing: -0.05em;
@@ -60,7 +60,7 @@
   justify-content: space-between;
   gap: 20px;
   padding: 17px 19px;
-  color: #173c31;
+  color: var(--brand-ink);
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
@@ -74,7 +74,7 @@
 
 .bp-faq-item summary:focus-visible {
   border-radius: 16px;
-  outline: 3px solid #77bf35;
+  outline: 3px solid var(--brand-green);
   outline-offset: -3px;
 }
 
@@ -83,9 +83,9 @@
   flex: 0 0 30px;
   width: 30px;
   height: 30px;
-  border: 1px solid #dce8d7;
+  border: 1px solid var(--brand-green-border);
   border-radius: 50%;
-  background: #f7fbf3;
+  background: var(--brand-green-soft);
 }
 
 .bp-faq-toggle::before,
@@ -96,7 +96,7 @@
   width: 11px;
   height: 1.5px;
   border-radius: 2px;
-  background: #54833d;
+  background: var(--brand-green-dark);
   content: "";
   transform: translate(-50%, -50%);
   transition: transform 180ms ease;

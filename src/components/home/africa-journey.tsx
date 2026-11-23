@@ -22,11 +22,11 @@ function AfricaMap({active,reduce}:{active:number;reduce:boolean|null}){
   return {countries:africa,projection:p};
  },[]);
  const path=geoPath(projection);const selected=destinations[active];const point=projection([selected.lng,selected.lat])||[250,200];
- return <svg className="bp-africa-map" viewBox="0 0 540 480" role="img" aria-label="Geographically based map of Africa"><defs><linearGradient id="bp-map-fill" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#F4F8EF"/><stop offset="1" stopColor="#D9E8D5"/></linearGradient><filter id="bp-map-glow"><feGaussianBlur stdDeviation="7"/></filter></defs>
+ return <svg className="bp-africa-map" viewBox="0 0 540 480" role="img" aria-label="Geographically based map of Africa"><defs><linearGradient id="bp-map-fill" x1="0" y1="0" x2="1" y2="1"><stop stopColor="var(--brand-green-soft)"/><stop offset="1" stopColor="var(--brand-green-border)"/></linearGradient><filter id="bp-map-glow"><feGaussianBlur stdDeviation="7"/></filter></defs>
   {countries.map((country,i)=><path key={i} d={path(country.geometry)||""} fill="url(#bp-map-fill)" stroke="#A7C5B0" strokeWidth=".8" opacity=".98"/>)}
-  {destinations.map((city,i)=>{const pt=projection([city.lng,city.lat]);if(!pt)return null;return <g key={city.code}><circle cx={pt[0]} cy={pt[1]} r={i===active?10:4} fill={i===active?"#8FCC31":"#2F6C52"} opacity={i===active?.24:.5}/><circle cx={pt[0]} cy={pt[1]} r={i===active?5:2.5} fill={i===active?"#79B82D":"#3D805B"} stroke="#fff" strokeWidth="1.6"/></g>})}
-  <motion.circle key={selected.code+"glow"} cx={point[0]} cy={point[1]} r="20" fill="#93CF42" opacity=".28" filter="url(#bp-map-glow)" initial={reduce?false:{opacity:0,scale:.6}} animate={{opacity:.35,scale:1}} transition={{duration:.6}}/>
-  <motion.circle key={selected.code} cx={point[0]} cy={point[1]} r="9" fill="none" stroke="#529E28" strokeWidth="2" initial={reduce?false:{r:5,opacity:1}} animate={{r:23,opacity:0}} transition={{duration:2,repeat:reduce?0:Infinity}}/>
+  {destinations.map((city,i)=>{const pt=projection([city.lng,city.lat]);if(!pt)return null;return <g key={city.code}><circle cx={pt[0]} cy={pt[1]} r={i===active?10:4} fill={i===active?"var(--brand-green)":"var(--brand-green-dark)"} opacity={i===active?.24:.5}/><circle cx={pt[0]} cy={pt[1]} r={i===active?5:2.5} fill={i===active?"var(--brand-green-dark)":"var(--brand-green-dark)"} stroke="#fff" strokeWidth="1.6"/></g>})}
+  <motion.circle key={selected.code+"glow"} cx={point[0]} cy={point[1]} r="20" fill="var(--brand-green)" opacity=".28" filter="url(#bp-map-glow)" initial={reduce?false:{opacity:0,scale:.6}} animate={{opacity:.35,scale:1}} transition={{duration:.6}}/>
+  <motion.circle key={selected.code} cx={point[0]} cy={point[1]} r="9" fill="none" stroke="var(--brand-green-dark)" strokeWidth="2" initial={reduce?false:{r:5,opacity:1}} animate={{r:23,opacity:0}} transition={{duration:2,repeat:reduce?0:Infinity}}/>
  </svg>
 }
 export function AfricaJourney({locale}:{locale:"fr"|"en"}){
@@ -44,7 +44,7 @@ export function AfricaJourney({locale}:{locale:"fr"|"en"}){
   <div className="bp-africa-art bp-africa-map-art"><div className="bp-map-grid"/><div className="bp-map-head"><span className="bp-map-dot"/> BIAPAY <span>{fr?"UNE AFRIQUE DE POSSIBILITÉS":"A CONTINENT OF POSSIBILITIES"}</span></div>
    <AfricaMap active={active} reduce={reduce}/>
    <AnimatePresence mode="wait"><motion.div className="bp-map-transaction" key={selected.code} initial={reduce?false:{opacity:0,y:20}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{duration:.35}}>
-   <div className="bp-map-transaction-top"><span className="bp-map-icon"><Icon size={18}/></span><span>{selected.city}<small>{fr?selected.country:selected.enCountry}</small></span><CheckCircle2 size={17} color="#7DAF3B"/></div>
+   <div className="bp-map-transaction-top"><span className="bp-map-icon"><Icon size={18}/></span><span>{selected.city}<small>{fr?selected.country:selected.enCountry}</small></span><CheckCircle2 size={17} color="var(--brand-green-dark)"/></div>
    <div className="bp-map-amount">{selected.amount}</div><div className="bp-map-transaction-foot">{fr?selected.fr:selected.en}<ArrowRight size={15}/></div>
    </motion.div></AnimatePresence>
    <div className="bp-map-footer"><span>{fr?"Parcours illustratifs":"Illustrative journeys"}</span><div><span>{String(active+1).padStart(2,"0")} / 04</span><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?(fr?"Pause":"Pause"):(fr?"Lecture":"Play")}>{playing?<Pause size={15}/>:<Play size={15}/>}</button></div></div>

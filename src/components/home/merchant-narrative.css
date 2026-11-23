@@ -1,6 +1,6 @@
 .px-page {
   min-height: 100%;
-  background: #070b13;
+  background: var(--brand-ink);
   color: #eef2f4;
   scroll-behavior: smooth;
 }
@@ -9,7 +9,7 @@
   position: relative;
   overflow: hidden;
   padding: clamp(88px, 11vw, 150px) 0;
-  background: #080e18;
+  background: var(--brand-ink);
   color: #eef2f4;
   isolation: isolate;
 }
@@ -22,7 +22,7 @@
   width: min(60vw, 760px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: #102949;
+  background: var(--brand-ink);
   content: "";
   filter: blur(130px);
   opacity: 0.3;
@@ -85,14 +85,14 @@
   overflow: hidden;
   border: 1px solid #ffffff20;
   border-radius: 22px;
-  background: #111c2a;
+  background: var(--brand-ink);
   box-shadow: 0 35px 100px #00000055;
 }
 
 .px-story-visual::after {
   position: absolute;
   inset: 30% 0 0;
-  background: linear-gradient(0deg, #07101bd9, transparent);
+  background: linear-gradient(0deg, color-mix(in srgb, var(--brand-ink) 85.1%, transparent), transparent);
   content: "";
   pointer-events: none;
 }
@@ -116,7 +116,7 @@
   min-height: 460px;
   align-items: center;
   background: #fff;
-  color: #263b51;
+  color: var(--brand-blue-hover);
 }
 
 .px-reveal-layout {
@@ -140,7 +140,7 @@
 
 .px-benefits {
   padding: clamp(90px, 10vw, 140px) 0;
-  background: #080e18;
+  background: var(--brand-ink);
   color: #f5f7f8;
 }
 
@@ -161,14 +161,14 @@
   padding: 27px 23px;
   border: 1px solid #ffffff1a;
   border-radius: 18px;
-  background: linear-gradient(145deg, #111e2c, #0b1420);
+  background: linear-gradient(145deg, var(--brand-ink), var(--brand-ink));
   transition: border-color 220ms ease, transform 220ms ease, background 220ms ease;
 }
 
 .px-benefit-card:hover {
   transform: translateY(-5px);
-  border-color: #a9d68166;
-  background: linear-gradient(145deg, #152638, #0b1420);
+  border-color: color-mix(in srgb, var(--brand-green-light) 40.0%, transparent);
+  background: linear-gradient(145deg, var(--brand-ink), var(--brand-ink));
 }
 
 .px-benefit-icon {
@@ -176,10 +176,10 @@
   width: 48px;
   height: 48px;
   place-items: center;
-  border: 1px solid #a9d68140;
+  border: 1px solid color-mix(in srgb, var(--brand-green-light) 25.1%, transparent);
   border-radius: 15px;
-  background: #a9d68116;
-  color: #bce58a;
+  background: color-mix(in srgb, var(--brand-green-light) 8.6%, transparent);
+  color: var(--brand-green-light);
 }
 
 .px-benefit-art {
@@ -214,13 +214,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #e7f2dc;
+  color: var(--brand-green-border);
   font-size: 15px;
   font-weight: 800;
 }
 
 .px-art-funds i {
-  color: #a9d681;
+  color: var(--brand-green-light);
   font-size: 11px;
   font-style: normal;
   letter-spacing: 0.1em;
@@ -237,7 +237,7 @@
 .px-art-bars i {
   width: 8px;
   border-radius: 5px 5px 1px 1px;
-  background: linear-gradient(180deg, #c8e8a3, #73a951);
+  background: linear-gradient(180deg, var(--brand-green-light), var(--brand-green));
 }
 
 .px-art-bars i:nth-child(1),
@@ -274,7 +274,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #a9d681;
+  background: var(--brand-green-light);
   content: "";
 }
 
@@ -304,7 +304,7 @@
 
 .px-plans,
 .px-compare {
-  background: #0a111c;
+  background: var(--brand-ink);
   color: #eff3f5;
 }
 
@@ -320,20 +320,20 @@
 
 .px-plan {
   border-color: #ffffff20;
-  background: #111d2b;
+  background: var(--brand-ink);
   color: #f0f3f5;
   box-shadow: 0 18px 48px #0003;
 }
 
 .px-plan-1 {
-  border-color: #a9d68176;
-  background: linear-gradient(155deg, #182b3c, #101c29);
+  border-color: color-mix(in srgb, var(--brand-green-light) 46.3%, transparent);
+  background: linear-gradient(155deg, var(--brand-ink), var(--brand-ink));
   box-shadow: 0 20px 55px #0005, inset 0 1px #ffffff12;
 }
 
 .px-plan-number,
 .px-plan-1 .px-plan-number {
-  color: #a9d681;
+  color: var(--brand-green-light);
 }
 
 .px-plan-top > p,
@@ -349,17 +349,17 @@
 
 .px-plan-action,
 .px-plan-1 .px-plan-action {
-  background: #c8e8a3;
-  color: #14251b;
+  background: var(--brand-green-light);
+  color: var(--brand-ink);
 }
 
 .px-plan-action:hover {
-  background: #d8f0bb;
+  background: var(--brand-green-border);
 }
 
 .px-popular {
-  background: #d9efbd;
-  color: #294528;
+  background: var(--brand-green-border);
+  color: var(--brand-ink);
 }
 
 .px-disclaimer {
@@ -380,7 +380,7 @@
 }
 
 .px-table-scroll thead {
-  background: #17283a;
+  background: var(--brand-ink);
   color: #eef3f5;
 }
 
@@ -391,7 +391,7 @@
 }
 
 .px-table-scroll tbody tr:nth-child(even) {
-  background: #101b29;
+  background: var(--brand-ink);
 }
 
 .px-notes-grid > div {
@@ -484,16 +484,16 @@
 }
 
 .px-hero {
-  background: #080e18;
+  background: var(--brand-ink);
 }
 
 .px-hero::before {
-  background: linear-gradient(90deg, #07101be8 0%, #091421c2 50%, #07101be8 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--brand-ink) 91.0%, transparent) 0%, color-mix(in srgb, var(--brand-ink) 76.1%, transparent) 50%, color-mix(in srgb, var(--brand-ink) 91.0%, transparent) 100%);
 }
 
 .px-page {
   background: #fff;
-  color: #163e31;
+  color: var(--brand-ink);
 }
 
 .px-story,
@@ -501,7 +501,7 @@
 .px-plans,
 .px-compare {
   background: #fff;
-  color: #263b51;
+  color: var(--brand-blue-hover);
 }
 
 .px-story::before {
@@ -515,7 +515,7 @@
 .px-compare .px-heading h2,
 .px-notes h3,
 .px-plan h3 {
-  color: #15367f;
+  color: var(--brand-blue-hover);
 }
 
 .px-story-copy p,
@@ -526,8 +526,8 @@
 
 .px-story-visual {
   border-color: #e4e9ef;
-  background: #f8fafc;
-  box-shadow: 0 20px 55px #18304a12;
+  background: var(--brand-blue-soft);
+  box-shadow: 0 20px 55px color-mix(in srgb, var(--brand-ink) 7.1%, transparent);
 }
 
 .px-story-visual::after {
@@ -536,27 +536,27 @@
 
 .px-reveal {
   background: #fff;
-  color: #263b51;
+  color: var(--brand-blue-hover);
 }
 
 .px-reveal-copy h2 {
-  color: #15367f;
+  color: var(--brand-blue-hover);
 }
 
 .px-benefit-card {
   border-color: #e4e9ef;
-  background: #f8fafc;
+  background: var(--brand-blue-soft);
 }
 
 .px-benefit-card:hover {
-  border-color: #cdddbb;
-  background: #f4f8ef;
+  border-color: var(--brand-green-light);
+  background: var(--brand-green-soft);
 }
 
 .px-benefit-icon {
-  border-color: #d3e2c6;
-  background: #f0f7e9;
-  color: #4a7734;
+  border-color: var(--brand-green-border);
+  background: var(--brand-green-soft);
+  color: var(--brand-green-dark);
 }
 
 .px-art-channels i {
@@ -571,7 +571,7 @@
   width: 40px;
   height: 7px;
   border-radius: 8px;
-  background: #dce9d2;
+  background: var(--brand-green-border);
 }
 
 .px-art-funds i:last-child {
@@ -579,7 +579,7 @@
 }
 
 .px-art-bars i {
-  background: linear-gradient(180deg, #a4ca77, #659344);
+  background: linear-gradient(180deg, var(--brand-green), var(--brand-green-dark));
 }
 
 .px-art-activity i {
@@ -587,7 +587,7 @@
 }
 
 .px-art-activity i::before {
-  background: #78a94e;
+  background: var(--brand-green);
 }
 
 .px-plans {
@@ -597,18 +597,18 @@
 .px-plan {
   border-color: #e1e8df;
   background: #fff;
-  color: #263b51;
-  box-shadow: 0 10px 30px #18304a0d;
+  color: var(--brand-blue-hover);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--brand-ink) 5.1%, transparent);
 }
 
 .px-plan-1 {
-  border-color: #d7e5cb;
-  background: #f4f8ef;
-  box-shadow: 0 12px 35px #18304a12;
+  border-color: var(--brand-green-border);
+  background: var(--brand-green-soft);
+  box-shadow: 0 12px 35px color-mix(in srgb, var(--brand-ink) 7.1%, transparent);
 }
 
 .px-plan-number {
-  color: #52723f;
+  color: var(--brand-green-dark);
 }
 
 .px-plan-top > p,
@@ -624,12 +624,12 @@
 
 .px-plan-action,
 .px-plan-1 .px-plan-action {
-  background: #e8f1df;
-  color: #294d36;
+  background: var(--brand-green-border);
+  color: var(--brand-green-dark);
 }
 
 .px-plan-action:hover {
-  background: #dcebcf;
+  background: var(--brand-green-border);
 }
 
 .px-disclaimer {
@@ -642,7 +642,7 @@
 
 .px-compare-toggle {
   border-color: #d2dece;
-  color: #284f39;
+  color: var(--brand-green-dark);
 }
 
 .px-table-scroll {
@@ -650,7 +650,7 @@
 }
 
 .px-table-scroll thead {
-  background: #15367f;
+  background: var(--brand-blue-hover);
   color: #fff;
 }
 
@@ -661,7 +661,7 @@
 }
 
 .px-table-scroll tbody tr:nth-child(even) {
-  background: #f8fafc;
+  background: var(--brand-blue-soft);
 }
 
 .px-notes-grid > div {
@@ -669,7 +669,7 @@
 }
 
 .px-notes-grid strong {
-  color: #263b51;
+  color: var(--brand-blue-hover);
 }
 
 .px-notes-grid p {

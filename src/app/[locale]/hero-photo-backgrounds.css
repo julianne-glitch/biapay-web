@@ -4,7 +4,7 @@
   isolation: isolate;
   overflow: hidden;
   color: #fff;
-  background: #12392f;
+  background: var(--brand-ink);
 }
 
 .agents-hero::before,
@@ -38,7 +38,7 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(90deg, #0d2f28d9 0%, #123e32b8 50%, #0d2f28d9 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--brand-ink) 85.1%, transparent) 0%, color-mix(in srgb, var(--brand-ink) 72.2%, transparent) 50%, color-mix(in srgb, var(--brand-ink) 85.1%, transparent) 100%);
 }
 
 .agents-hero-grid,
@@ -71,7 +71,7 @@
 
 .agents-hero h1 em,
 .agents-hero-note svg {
-  color: #bce58a;
+  color: var(--brand-green-light);
 }
 
 .agents-hero-lead,
@@ -110,7 +110,7 @@
 }
 
 .agents-proof svg {
-  color: #bce58a;
+  color: var(--brand-green-light);
 }
 
 .dv-hero-grid {
@@ -122,7 +122,7 @@
 }
 
 .dv-copy h1 em {
-  color: #bce58a;
+  color: var(--brand-green-light);
 }
 
 .dv-hero .dv-copy > p {
@@ -130,7 +130,7 @@
 }
 
 .dv-hero .dv-eyebrow {
-  color: #bce58a;
+  color: var(--brand-green-light);
 }
 
 .dv-proof span {
@@ -138,7 +138,7 @@
 }
 
 .dv-proof svg {
-  color: #bce58a;
+  color: var(--brand-green-light);
 }
 
 .dv-hero .dv-outline {
@@ -206,7 +206,7 @@
 }
 
 .dv-hero .dv-copy h1 em {
-  color: #bce58a;
+  color: var(--brand-green-light);
   font-style: normal;
 }
 

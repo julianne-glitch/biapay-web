@@ -25,10 +25,10 @@ export function LanguageSwitcher() {
           hrefLang={locale}
           aria-current={locale === current ? "page" : undefined}
           className={cn(
-            "min-w-9 rounded-full px-2.5 py-1.5 text-center font-bold uppercase leading-none transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#77bf35]",
+            "min-w-9 rounded-full px-2.5 py-1.5 text-center font-bold uppercase leading-none transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-green)]",
             locale === current
-              ? "bg-[#153f91] text-white shadow-[0_3px_9px_rgba(21,63,145,0.2)]"
-              : "text-[#153f91]/70 hover:bg-white/75 hover:text-[#153f91]",
+              ? "bg-[var(--brand-blue)] text-white shadow-[0_3px_9px_rgba(21,63,145,0.2)]"
+              : "text-[var(--brand-blue)]/70 hover:bg-white/75 hover:text-[var(--brand-blue)]",
           )}
         >
           {locale.toUpperCase()}
