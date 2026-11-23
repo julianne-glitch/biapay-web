@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from "react";
 import Image from "next/image";
-import { Globe, Wallet } from "lucide-react";
+import { ChevronDown, Globe, Wallet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import "./hero-flow.css";
 
@@ -54,7 +54,8 @@ const wireColors: Record<Method["tone"], [string, string]> = {
 
 export function HeroFlow() {
   const t = useTranslations("hero");
-  const [selected, setSelected] = useState<Method["key"]>("mobileMoney");
+  const [selectedMethod, setSelectedMethod] = useState(methods[0]);
+  const selected = selectedMethod.key;
 
   return (
     <div className="hf" role="group" aria-label={t("flowLabel")}>
@@ -74,25 +75,28 @@ export function HeroFlow() {
         </svg>
 
         <ul className="hf-methods">
-          {methods.map(({ key, top, avatar, logos }) => (
-            <li key={key} data-active={selected === key} className={`hf-method hf-method-${key}`} style={{ "--t": top, "--lw": logos.display } as CSSProperties}>
-              {avatar ? (
-                <Image className="hf-avatar" src={avatar} alt="" width={88} height={88} />
-              ) : (
-                <span className="hf-avatar hf-globe" aria-hidden="true"><Globe strokeWidth={1.8} /></span>
-              )}
-              <span className="hf-label">{t(key)}</span>
-              <button
-                className="hf-method-select"
-                type="button"
-                aria-label={t(key)}
-                aria-pressed={selected === key}
-                aria-controls="hf-wallet-flow"
-                onClick={() => setSelected(key)}
-              />
-              <Image className="hf-logos" src={logos.src} alt="" width={logos.width} height={logos.height} />
-            </li>
-          ))}
+          {methods.map((method) => {
+            const { key, top, avatar, logos } = method;
+            return (
+              <li key={key} data-active={selected === key} className={`hf-method hf-method-${key}`} style={{ "--t": top, "--lw": logos.display } as CSSProperties}>
+                {avatar ? (
+                  <Image className="hf-avatar" src={avatar} alt="" width={88} height={88} />
+                ) : (
+                  <span className="hf-avatar hf-globe" aria-hidden="true"><Globe strokeWidth={1.8} /></span>
+                )}
+                <span className="hf-label">{t(key)}</span>
+                <button
+                  className="hf-method-select"
+                  type="button"
+                  aria-label={t(key)}
+                  aria-pressed={selected === key}
+                  aria-controls="hf-wallet-flow"
+                  onClick={() => setSelectedMethod(method)}
+                />
+                <Image className="hf-logos" src={logos.src} alt="" width={logos.width} height={logos.height} />
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hf-hub">
@@ -100,12 +104,17 @@ export function HeroFlow() {
         </div>
 
         <div className="hf-wallet-flow" id="hf-wallet-flow">
-          <span className="hf-wallet-symbol"><Wallet size={19} aria-hidden="true" /></span>
-          <span className="hf-wallet-copy">
-            <strong>BIAPAY Wallet</strong>
-            <span aria-live="polite">{t(selected)}</span>
+          <div className="hf-flow-source">
+            <strong aria-live="polite">{t(selected)}</strong>
+            <Image src={selectedMethod.logos.src} alt="" width={selectedMethod.logos.width} height={selectedMethod.logos.height} />
+          </div>
+          <span key={selected} className="hf-flow-track" aria-hidden="true">
+            <span className="hf-flow-packet"><ChevronDown size={13} strokeWidth={2.8} /></span>
           </span>
-          <span key={selected} className="hf-wallet-signal" aria-hidden="true"><i /><i /><i /></span>
+          <div key={`wallet-${selected}`} className="hf-flow-destination">
+            <span className="hf-wallet-symbol"><Wallet size={18} aria-hidden="true" /></span>
+            <strong>BIAPAY Wallet</strong>
+          </div>
         </div>
 
         <p className="hf-flow-hint">{t("flowHint")}</p>

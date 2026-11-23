@@ -38,6 +38,7 @@ export function PremiumHome({ locale }: { locale: Locale }) {
                         </em>
                     </h1>
                     <p className="bp-lead2"><strong>{hero("leadStrong")}</strong> {hero("leadRest")}</p>
+                    <p className="bp-mobile-lead">{hero("mobileLead")}</p>
                     <div className="bp-hero2-actions">
                         <a className="bp-h2-primary" href={accountLinks.register}><User aria-hidden="true" strokeWidth={2.2} />{hero("cta1")} <ArrowRight size={17} aria-hidden="true" /></a>
                     </div>
